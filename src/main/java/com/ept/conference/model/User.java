@@ -16,7 +16,7 @@ public class User {
     private String Speciality;
     private String password;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "admin_id")
     private Set<Conference> conferences = new HashSet<Conference>();
 
@@ -31,7 +31,7 @@ public class User {
     @ManyToMany(mappedBy = "reviewers")
     private Set<Article> toReviewArticles = new HashSet<Article>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "tutorial_id")
     private Set<Tutorial> tutorial = new HashSet<Tutorial>();
 
@@ -41,17 +41,16 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String username, String email, String speciality, String password) {
-        this.id = id;
+    public User(String username, String email, String speciality, String password) {
         Username = username;
         this.email = email;
         Speciality = speciality;
         this.password = password;
     }
 
-    public User(Long id, String username, String email, String password) {
-        this.id = id;
-        Username = username;
+    public User(String username, String email, String password) {
+
+        this.Username = username;
         this.email = email;
         this.password = password;
     }

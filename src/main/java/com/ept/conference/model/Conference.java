@@ -1,6 +1,7 @@
 package com.ept.conference.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,10 +14,10 @@ public class Conference {
     private Long id;
 
     private String title;
-    private Date date;
+    private LocalDateTime date;
     private String description;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User admin;
 
     @ManyToMany
@@ -29,19 +30,18 @@ public class Conference {
         inverseJoinColumns = @JoinColumn(name = "reviewer_id"))
     private Set<User> reviewers = new HashSet<User>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "conference_id")
     private Set<Tutorial> tutorials = new HashSet<Tutorial>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "conference_id")
     private Set<Session> sessions = new HashSet<Session>();
 
     public Conference() {
     }
 
-    public Conference(Long id, String title, Date date, String description) {
-        this.id = id;
+    public Conference(String title, LocalDateTime date, String description) {
         this.title = title;
         this.date = date;
         this.description = description;
@@ -63,11 +63,11 @@ public class Conference {
         this.title = title;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -118,6 +118,7 @@ public class Conference {
     public void setSessions(Set<Session> sessions) {
         this.sessions = sessions;
     }
+
 
     @Override
     public boolean equals(Object o) {

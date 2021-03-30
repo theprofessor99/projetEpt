@@ -15,7 +15,7 @@ public class Tutorial {
     private String desc;
     private String status;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Conference conference;
 
     @ManyToMany
@@ -23,14 +23,13 @@ public class Tutorial {
         inverseJoinColumns = @JoinColumn(name = "participant_id"))
     private Set<User> participants = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User tutor;
 
     public Tutorial() {
     }
 
-    public Tutorial(Long id, String title, String desc) {
-        this.id = id;
+    public Tutorial(String title, String desc) {
         this.title = title;
         this.desc = desc;
         this.status = "pending";
