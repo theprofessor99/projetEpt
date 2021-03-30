@@ -17,14 +17,13 @@ public class Theme {
             inverseJoinColumns = @JoinColumn(name = "article_id"))
     private Set<Article> articles = new HashSet<Article>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "theme_id")
     private Set<Session> sessions = new HashSet<>();
     public Theme() {
     }
 
-    public Theme(Long id, String name) {
-        this.id = id;
+    public Theme(String name) {
         this.name = name;
     }
 

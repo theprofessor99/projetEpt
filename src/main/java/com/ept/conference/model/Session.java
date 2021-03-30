@@ -1,6 +1,8 @@
 package com.ept.conference.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,25 +15,23 @@ public class Session {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Date date;
+    private LocalDateTime date;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Theme theme;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Conference conference;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "session_id")
     private Set<Article> articles = new HashSet<Article>();
 
     public Session() {
     }
 
-    public Session(Long id, Date date, Theme theme, Conference conference) {
-        this.id = id;
+    public Session(LocalDateTime date) {
         this.date = date;
-        this.theme = theme;
         this.conference = conference;
     }
 
@@ -43,11 +43,11 @@ public class Session {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

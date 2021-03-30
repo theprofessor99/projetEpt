@@ -9,6 +9,7 @@ import java.util.Set;
 @Entity
 public class Article {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -19,7 +20,7 @@ public class Article {
 
     @ManyToMany(mappedBy = "articles")
     private Set<Theme> themes = new HashSet<Theme>();
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Session session;
 
     @ManyToMany
@@ -35,8 +36,7 @@ public class Article {
     public Article() {
     }
 
-    public Article(Long id, String title, String description) {
-        this.id = id;
+    public Article(String title, String description) {
         this.title = title;
         this.description = description;
         this.rating = 0;
