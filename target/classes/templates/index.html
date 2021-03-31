@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+        
+        <title>trillo &mdash; Your all-in-one booking app</title>
+    </head>
+    <body>
+        <div class="main_container">
+            <header class="header">
+                <img src="img/logo.png" alt="trillo logo" class="logo">
+
+                <form action="#" class="search">
+                    <input type="text" class="search__input" placeholder="Search hotels">
+                    <button class="search__button">
+                        <svg class="search__icon">
+                            <use xlink:href="img/sprite.svg#icon-magnifying-glass"></use>
+                        </svg>
+                    </button>
+                </form>
+
+                <nav class="user-nav">
+                    <div class="user-nav__icon-box">
+                        <svg class="user-nav__icon">
+                            <use xlink:href="img/sprite.svg#icon-bookmark"></use>
+                        </svg>
+                        <span class="user-nav__notification">7</span>
+                    </div>
+                    <div class="user-nav__icon-box">
+                        <svg class="user-nav__icon">
+                            <use xlink:href="img/sprite.svg#icon-chat"></use>
+                        </svg>
+                        <span class="user-nav__notification">13</span>
+                    </div>
+                    <div class="user-nav__user">
+                        <img src="img/user.jpg" alt="User photo" class="user-nav__user-photo">
+                        <span class="user-nav__user-name">Jonas</span>
+                    </div>
+                </nav>
+            </header>
+
+
+            <div class="content">
+                <nav class="sidebar">
+                    <ul class="side-nav">
+                        <li class="side-nav__item side-nav__item--active">
+                            <a href="#" class="side-nav__link">
+                                <span>Confernces</span>
+                            </a>
+                        </li>
+                        <li class="side-nav__item">
+                            <a href="/articleList.html" class="side-nav__link">
+                                <span>Articles</span>
+                            </a>
+                        </li>
+                        <li class="side-nav__item">
+                            <a href="/login.html" class="side-nav__link">
+                                <span>Log out</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="legal">
+                        &copy; 2021 by Ept. All rights reserved.
+                    </div>
+                </nav>
+
+
+
+                <main class="hotel-view">
+                    <div class="wrapper">
+                    <div class="wrapper__create">
+                        <h1>Create Conference</h1>
+                        <form class="wrapper__form" action="/payment.html" mathod="GET">
+                            <label for="title">Title:</label><br>
+                            <input type="text" id="title" name="title"><br>
+                            <label for="date">date:</label><br>
+                            <input type="date" id="date" name="date"><br>
+                            <label for="description">description:</label><br>
+                            <input type="description" id="description" name="description"><br><br>
+                            <button type="submit" class="btn btn-primary">create</button>
+                        </form>
+                    </div>
+
+                    <div class="wrapper__my-confs">
+                        <h1>My Conferences</h1>
+                        <div class="wrapper__conf-card">
+                            <h3>Title : </h3>
+                            <p class="card__text">Lorem ipsum, dolor sit amet</p>
+                            <h3>Date : </h3>
+                            <p class="card__text">09/11/2001</p>
+                            <h3>Description : </h3>
+                            <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, quis est ipsa, iusto a laboriosam aut in magni blanditiis, veritatis maiores? Quas similique voluptatum fugiat deleniti voluptas corporis, aliquam earum?</p>
+                            <a href="/conference.html" class="card__link">read more</a>
+                        </div>
+                    </div>
+
+                    <div class="wrapper__my-confs">
+                        <h1>Browse Conferences</h1>
+                        <div class="wrapper__conf-card">
+                            <h3>Title : </h3>
+                            <p class="card__text">Lorem ipsum, dolor sit amet</p>
+                            <h3>Date : </h3>
+                            <p class="card__text">09/11/2001</p>
+                            <h3>Description : </h3>
+                            <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, quis est ipsa, iusto a laboriosam aut in magni blanditiis, veritatis maiores? Quas similique voluptatum fugiat deleniti voluptas corporis, aliquam earum?</p>
+                            <a href="#" class="card__link">read more</a>
+                        </div>
+                    </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>
