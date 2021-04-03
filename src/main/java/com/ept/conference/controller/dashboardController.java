@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/")
@@ -31,8 +30,8 @@ public class dashboardController {
          User user = userRepository.findByUsername(username);
 
          model.addAttribute("username", user.getUsername());
-         model.addAttribute("myConfs", conferenceRepository.findConferenceByAdmin(user));
-         model.addAttribute("subscribedConfs", conferenceRepository.findConferenceByParticipant(user));
+         model.addAttribute("myConfs", conferenceRepository.findConferenceByAdmin(username));
+         model.addAttribute("subscribedConfs", conferenceRepository.findConferenceByParticipant(username));
          model.addAttribute("browseConfs", conferenceRepository.findAll());
 
          return "index";

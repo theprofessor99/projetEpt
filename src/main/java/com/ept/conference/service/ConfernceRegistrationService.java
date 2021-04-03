@@ -4,12 +4,15 @@ import com.ept.conference.model.Conference;
 import com.ept.conference.model.User;
 import com.ept.conference.repositories.ConferenceRepository;
 import com.ept.conference.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Set;
 
+@Service
 public class ConfernceRegistrationService {
 
     public final UserRepository userRepository;
