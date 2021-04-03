@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Component
 public class ConferenceBootstrap implements CommandLineRunner {
 
+
     private final ArticleRepository articleRepository;
     private final ConferenceRepository conferenceRepository;
     private final SessionRepository sessionRepository;
