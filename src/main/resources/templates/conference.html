@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+        
+        <title>trillo &mdash; Your all-in-one booking app</title>
+    </head>
+    <body>
+        <div class="main_container">
+            <header class="header">
+                <img src="img/logo.png" alt="trillo logo" class="logo">
+
+                <form action="#" class="search">
+                    <input type="text" class="search__input" placeholder="Search hotels">
+                    <button class="search__button">
+                        <svg class="search__icon">
+                            <use xlink:href="img/sprite.svg#icon-magnifying-glass"></use>
+                        </svg>
+                    </button>
+                </form>
+
+                <nav class="user-nav">
+                    <div class="user-nav__icon-box">
+                        <svg class="user-nav__icon">
+                            <use xlink:href="img/sprite.svg#icon-bookmark"></use>
+                        </svg>
+                        <span class="user-nav__notification">7</span>
+                    </div>
+                    <div class="user-nav__icon-box">
+                        <svg class="user-nav__icon">
+                            <use xlink:href="img/sprite.svg#icon-chat"></use>
+                        </svg>
+                        <span class="user-nav__notification">13</span>
+                    </div>
+                    <div class="user-nav__user">
+                        <img src="img/user.jpg" alt="User photo" class="user-nav__user-photo">
+                        <span class="user-nav__user-name">oussama</span>
+                    </div>
+                </nav>
+            </header>
+
+
+            <div class="content">
+                <nav class="sidebar">
+                    <ul class="side-nav">
+                        <li class="side-nav__item">
+                            <a href="/index.html" class="side-nav__link">
+                                <span>Confernces</span>
+                            </a>
+                        </li>
+                        <li class="side-nav__item">
+                            <a href="/articleList.html" class="side-nav__link">
+                                <span>Articles</span>
+                            </a>
+                        </li>
+                        <li class="side-nav__item">
+                            <a href="/login.html" class="side-nav__link">
+                                <span>Log out</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="legal">
+                        &copy; 2021 by Ept. All rights reserved.
+                    </div>
+                </nav>
+
+
+
+                <main class="hotel-view">
+                    <div class="wrapper">
+                      <h1>Informations</h1>
+                      <h3 class="conf__info">Title:</h3>
+                      <p class="desc__text">dummy conf</p>
+                      <h3 class="conf__info">Start date:</h3>
+                      <p class="desc__text">01/01/2022</p>
+                      <h3 class="conf__info">Description: </h3>
+                      <p class="desc__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, cumque nisi, laboriosam neque iure laudantium reiciendis deserunt libero temporibus aspernatur dicta eos? Totam consequatur aliquam nostrum animi earum veniam quibusdam.</p>
+
+                      <form action="/payment.html" method="GET" style="margin-left: 2rem;">
+                        <button type="submit" class="btn btn-primary">subscribe</button>
+                      </form>
+                      <form action="/addArticle.html" style="margin-left: 2rem;margin-top: 1rem;">
+                          <button class="btn btn-success">
+                              add article
+                          </button>
+                      </form>
+                      <form action="addTuto.html" method="GET" style="margin-left: 2rem;margin-top: 1rem;">
+                        <button class="btn btn-success">
+                            create tutorial
+                        </button>
+                    </form>
+                    </div>
+
+                    <div class="container">
+                      <h1 id="timeline_header">Timeline</h1>
+                    <div id="timeline"><div class="row timeline-movement timeline-movement-top">
+                      <div class="timeline-badge timeline-filter-movement">
+                          <a>
+                              <span class="glyphicon glyphicon-time"></span>
+                          </a>
+                      </div>
+                  
+                  </div>
+                  <div class="row timeline-movement">
+                  
+                      <div class="timeline-badge">
+                          <span class="timeline-balloon-date-day">10</span>
+                          <span class="timeline-balloon-date-month">APR</span>
+                      </div>
+                  
+                  
+                      <div class="col-sm-6  timeline-item">
+                          <div class="row">
+                              <div class="col-sm-11">
+                                  <div class="timeline-panel credits">
+                                      <ul class="timeline-panel-ul">
+                                          <li><span class="importo">Tutorial 1</span></li>
+                                          <li><span id="tuto">tutor :</span> yomna</li>
+                                          <li><span class="causale"><span id="tuto">Title: </span>cours math de l'ingenieur </span> </li>
+                                          <li><span class="causale"><span id="tuto">description :</span>  Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi eaque at quas dolorem neque. Eaque a, similique tenetur</span> </li>
+                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
+                                          <form action="/payment.html" method="GET">
+                                          <button class="btn btn-primary">
+                                              attend
+                                          </button>
+                                        </form>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-sm-6  timeline-item">
+                          <div class="row">
+                              <div class="col-sm-offset-1 col-sm-11">
+                                  <div class="timeline-panel debits">
+                                      <ul class="timeline-panel-ul">
+                                          <li><span class="importo">session 1</span></li>
+                                          <li><span class="causale">theme : energy</span> </li>
+                                          <li><span class="causale">article 1 : solar</span> </li>
+                                          <a href="/article.html">check</a>
+                                          <li><span class="causale">article 2 : wind</span> </li>
+                                          <a href="/article.html">check</a>
+                                          <li><span class="causale">article 3 : hydro</span> </li>
+                                          <a href="/article.html">check</a>
+                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-sm-6  timeline-item">
+                        <div class="row">
+                            <div class="col-sm-11">
+                                <div class="timeline-panel credits">
+                                    <ul class="timeline-panel-ul">
+                                        <li><span class="importo">Tutorial 1</span></li>
+                                        <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+                                        <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 10:30 am</small></p> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                      <div class="col-sm-6  timeline-item">
+                        <div class="row">
+                            <div class="col-sm-offset-1 col-sm-11">
+                                <div class="timeline-panel debits">
+                                    <ul class="timeline-panel-ul">
+                                        <li><span class="importo">session 2</span></li>
+                                        <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+                                        <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 10:30 am</small></p> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6  timeline-item">
+                        <div class="row">
+                            <div class="col-sm-11">
+                                <div class="timeline-panel credits">
+                                    <ul class="timeline-panel-ul">
+                                        <li><span class="importo">Tutorial 3</span></li>
+                                        <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+                                        <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 14:00 am</small></p> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6  timeline-item">
+                      <div class="row">
+                          <div class="col-sm-offset-1 col-sm-11">
+                              <div class="timeline-panel debits">
+                                  <ul class="timeline-panel-ul">
+                                      <li><span class="importo">session 3</span></li>
+                                      <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+                                      <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 14:00 am</small></p> </li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-sm-6  timeline-item">
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="timeline-panel credits">
+                                <ul class="timeline-panel-ul">
+                                    <li><span class="importo">Tutorial 4</span></li>
+                                    <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+                                    <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 15:30 am</small></p> </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <div class="col-sm-6  timeline-item">
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-sm-11">
+                            <div class="timeline-panel debits">
+                                <ul class="timeline-panel-ul">
+                                    <li><span class="importo">session 4</span></li>
+                                    <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+                                    <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 15:30 am</small></p> </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                  </div>
+                  
+                  <!--due -->
+                  
+                  <div class="row timeline-movement">
+                  
+                  
+                      <div class="timeline-badge">
+                          <span class="timeline-balloon-date-day">11</span>
+                          <span class="timeline-balloon-date-month">APR</span>
+                      </div>
+                  
+                      <div class="col-sm-offset-6 col-sm-6  timeline-item">
+                          <div class="row">
+                              <div class="col-sm-offset-1 col-sm-11">
+                                  <div class="timeline-panel debits">
+                                      <ul class="timeline-panel-ul">
+                                          <li><span class="importo">session 1</span></li>
+                                          <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
+                                      </ul>
+                                  </div>
+                  
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-sm-6  timeline-item">
+                          <div class="row">
+                              <div class="col-sm-11">
+                                  <div class="timeline-panel credits">
+                                      <ul class="timeline-panel-ul">
+                                          <li><span class="importo">tutorial 1</span></li>
+                                          <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 14:00</small></p> </li>
+                                      </ul>
+                                  </div>
+                  
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-sm-offset-6 col-sm-6  timeline-item">
+                        <div class="row">
+                            <div class="col-sm-offset-1 col-sm-11">
+                                <div class="timeline-panel debits">
+                                    <ul class="timeline-panel-ul">
+                                        <li><span class="importo">session 2</span></li>
+                                        <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+                                        <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 14:00</small></p> </li>
+                                    </ul>
+                                </div>
+                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6  timeline-item">
+                        <div class="row">
+                            <div class="col-sm-11">
+                                <div class="timeline-panel credits">
+                                    <ul class="timeline-panel-ul">
+                                        <li><span class="importo">tutorial 2</span></li>
+                                        <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+                                        <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 15:30 pm</small></p> </li>
+                                    </ul>
+                                </div>
+                
+                            </div>
+                        </div>
+                    </div>
+                  
+                  
+                  </div>
+                  <div class="row timeline-movement">
+                  
+                  
+                      <div class="timeline-badge">
+                          <span class="timeline-balloon-date-day">12</span>
+                          <span class="timeline-balloon-date-month">APR</span>
+                      </div>
+                  
+                      <div class="col-sm-offset-6 col-sm-6  timeline-item">
+                          <div class="row">
+                              <div class="col-sm-offset-1 col-sm-11">
+                                  <div class="timeline-panel debits">
+                                      <ul class="timeline-panel-ul">
+                                          <li><span class="importo">session 1</span></li>
+                                          <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
+                                      </ul>
+                                  </div>
+                  
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-sm-offset-6 col-sm-6  timeline-item">
+                          <div class="row">
+                              <div class="col-sm-offset-1 col-sm-11">
+                                  <div class="timeline-panel debits">
+                                      <ul class="timeline-panel-ul">
+                                          <li><span class="importo">session 2</span></li>
+                                          <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 10:30 am</small></p> </li>
+                                      </ul>
+                                  </div>
+                  
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  </div>
+                  </div>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

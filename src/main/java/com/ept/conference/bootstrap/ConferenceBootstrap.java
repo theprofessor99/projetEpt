@@ -1,5 +1,6 @@
 package com.ept.conference.bootstrap;
 
+import com.ept.conference.controller.dto.UserRegistrationDto;
 import com.ept.conference.model.*;
 import com.ept.conference.repositories.*;
 import org.springframework.boot.CommandLineRunner;
@@ -30,7 +31,7 @@ public class ConferenceBootstrap implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        User oussama = new User("oussama", "oussamamaster0@gmail.com", "password");
+        /*User oussama = new UserRegistrationDto("oussama", "oussamamaster0@gmail.com", "password", );
         User houssem = new User("houssem", "houssemmaster0@gmail.com", "password");
         User rami = new User("rami", "ramimaster0@gmail.com", "password");
         User kammoun = new User("kammoun", "kammounmaster0@gmail.com", "password");
@@ -83,7 +84,6 @@ public class ConferenceBootstrap implements CommandLineRunner {
 
         System.out.println("articles " + articleRepository.count());
 
-        conferenceRepository.findAll().forEach(conference -> System.out.println(conference.getTitle()));
-
+        conferenceRepository.findAll().forEach(conference -> System.out.println(conference.getTitle()));*/
     }
 }

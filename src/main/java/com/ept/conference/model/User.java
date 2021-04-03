@@ -1,6 +1,7 @@
 package com.ept.conference.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,18 +42,30 @@ public class User {
     public User() {
     }
 
-    public User(String username, String email, String speciality, String password) {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id"))
+
+    private Collection<Role> roles;
+
+    public User(String username, String email, String speciality, String password, Collection<Role> roles) {
         Username = username;
         this.email = email;
         Speciality = speciality;
         this.password = password;
+        this.roles = roles;
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, Collection<Role> roles) {
 
         this.Username = username;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -149,6 +162,14 @@ public class User {
 
     public void setSubscribedTutorial(Set<Tutorial> subscribedTutorial) {
         this.subscribedTutorial = subscribedTutorial;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
