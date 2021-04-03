@@ -12,7 +12,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String Username;
+    private String username;
     private String email;
     private String Speciality;
     private String password;
@@ -53,7 +53,7 @@ public class User {
     private Collection<Role> roles;
 
     public User(String username, String email, String speciality, String password, Collection<Role> roles) {
-        Username = username;
+        this.username = username;
         this.email = email;
         Speciality = speciality;
         this.password = password;
@@ -62,7 +62,7 @@ public class User {
 
     public User(String username, String email, String password, Collection<Role> roles) {
 
-        this.Username = username;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.roles = roles;
@@ -77,11 +77,11 @@ public class User {
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getEmail() {
@@ -191,7 +191,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", Username='" + Username + '\'' +
+                ", Username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
