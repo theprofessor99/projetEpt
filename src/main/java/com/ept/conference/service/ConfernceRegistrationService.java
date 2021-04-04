@@ -8,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -23,7 +27,7 @@ public class ConfernceRegistrationService {
         this.conferenceRepository = conferenceRepository;
     }
 
-    public ArrayList<String>[] createConference(String title, LocalDateTime date, String description, String[] commitee, User admin){
+    public ArrayList<String>[] createConference(String title, String date, String description, String[] commitee, User admin) throws ParseException {
         ArrayList<User> users = new ArrayList<>();
         ArrayList<String> notFounduUsers = new ArrayList<>();
         ArrayList<String> foundUsers = new ArrayList<>();
@@ -37,14 +41,14 @@ public class ConfernceRegistrationService {
             }
         }
 
-        if(notFounduUsers.size() != 0 ){
+        if(notFounduUsers.size() != 0 || users.size() < 3){
             return new ArrayList[]{foundUsers, notFounduUsers};
         }else{
 
-            Conference conference = new Conference(title, date, description);
+            Conference conference = new Conference(title, LocalDate.parse(date), description);
 
             conference.setAdmin(admin);
-            conference.setReviewers((Set<User>)users);
+            conference.setReviewers(new HashSet<>(users));
             admin.getConferences().add(conference);
 
             userRepository.save(admin);
@@ -53,8 +57,6 @@ public class ConfernceRegistrationService {
                 user.getSupervisedConferences().add(conference);
                 userRepository.save(user);
             }
-
-            conferenceRepository.save(conference);
 
             return new ArrayList[]{foundUsers, notFounduUsers};
         }

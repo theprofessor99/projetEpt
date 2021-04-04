@@ -56,12 +56,12 @@
                             </a>
                         </li>
                         <li class="side-nav__item">
-                            <a href="/articleList.html" class="side-nav__link">
+                            <a href="/articleList" class="side-nav__link">
                                 <span>Articles</span>
                             </a>
                         </li>
                         <li class="side-nav__item">
-                            <a href="/login.html" class="side-nav__link">
+                            <a href="/logout" class="side-nav__link">
                                 <span>Log out</span>
                             </a>
                         </li>
@@ -78,26 +78,26 @@
                     <div class="wrapper">
                     <div class="wrapper__create">
                         <h1 style="margin-bottom: 2rem;">Create Conference</h1>
-                        <div class="alert alert-danger" th:if = "${param.failure}">User not found</div>
-                        <div class="alert alert-success" th:if = "${param.succes}">conference created</div>
-                        <form class="wrapper__form" action="/createConf" mathod="post">
+                        <div class="alert alert-danger" th:if = "${fail}" th:text="${error}">User not found</div>
+                        <div class="alert alert-success" th:if = "${param.success}">conference created</div>
+                        <form class="wrapper__form" action="/createConf" method="POST">
                             <label for="title">Title:</label><br>
-                            <input type="text" id="title" name="title" required><br>
+                            <input type="text" id="title" name="title" th:value="${title}" required><br>
                             <label for="date">date:</label><br>
-                            <input type="date" id="date" name="date" required><br>
+                            <input type="date" id="date" name="date" th:value="${date}" required><br>
                             <label for="description">description:</label><br>
-                            <input type="description" id="description" name="description" required><br><br>
+                            <input type="description" id="description" name="description" th:value="${description}" required><br><br>
                             <label for="username">Commitee members :</label><br>
                             <input type="text" id="username" style="margin-bottom: 1.2rem;">
                             <button type="button" class="btn btn-primary" 
                             onclick = "addUser()" style="margin-bottom: .1rem;">Add user</button><br>
 
-                            <div class="commitee" th:if = "${param.failure}">
+                            <div class="commitee">
                                 <th:block th:each = "user : ${foundUsers}">
                                     <div class="badge badge__user-exist">
                                         <input type="hidden" id="user" name="user" th:value="${user}">
                                         <div class="conf__user-container">
-                                            <span class="conf__user">${text}</span>
+                                            <span class="conf__user" th:text="${user}"></span>
                                             <button type="button" class="close" aria-label="Close"
                                                     onclick = "removeElement(this)">
                                                 <span aria-hidden="true">&times;</span>
@@ -106,10 +106,10 @@
                                     </div>
                                 </th:block>
                                 <th:block th:each = "user : ${notFoundUsers}">
-                                    <div class="badge badge__user-exist">
+                                    <div class="badge badge__user-notfound">
                                         <input type="hidden" name="user" th:value="${user}">
                                         <div class="conf__user-container">
-                                            <span class="conf__user">${text}</span>
+                                            <span class="conf__user" th:text="${user}"></span>
                                             <button type="button" class="close" aria-label="Close"
                                                     onclick = "removeElement(this)">
                                                 <span aria-hidden="true">&times;</span>
@@ -117,27 +117,8 @@
                                         </div>
                                     </div>
                                 </th:block>
-                            <div class="badge badge__user-exist">
-                                <div class="conf__user-container">
-                                    <span class="conf__user">oussama</span>
-                                    <button type="button" class="close" aria-label="Close" onclick="removeElement(this)">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
                                 </div>
-
-                                <input type="hidden" name="oussama" value="oussama">
-                            </div>
-
-                            <div class="badge badge__user-notfound">
-                                <div class="conf__user-container">
-                                <span class="conf__user">oussama</span>
-                                <button type="button" class="close" aria-label="Close" onclick = "removeElement(this)">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>
-                            </div>
-                            </div>
-                            <br>
+                            <div class="commitee"></div><br>
                             <button type="submit" class="btn btn-primary" style="margin-top: 4rem;">create</button>
                         </form>
                     </div>
@@ -147,36 +128,26 @@
                             <th:block th:each = "conf : ${myConfs}">
                                 <div class="wrapper__conf-card">
                                     <h3>Title : </h3>
-                                    <p class="card__text">${conf.title}</p>
+                                    <p class="card__text" th:text="${conf.title}"></p>
                                     <h3>Date : </h3>
-                                    <p class="card__text">${conf.date}</p>
+                                    <p class="card__text" th:text="${conf.date}"></p>
                                     <h3>Description : </h3>
-                                    <p class="card__text">${conf.description}</p>
+                                    <p class="card__text" th:text="${conf.description}"></p>
                                     <a href="/conference.html" class="card__link">read more</a>
                                 </div>
                             </th:block>
-
-                        <div class="wrapper__conf-card">
-                            <h3>Title : </h3>
-                            <p class="card__text">Lorem ipsum, dolor sit amet</p>
-                            <h3>Date : </h3>
-                            <p class="card__text">09/11/2001</p>
-                            <h3>Description : </h3>
-                            <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, quis est ipsa, iusto a laboriosam aut in magni blanditiis, veritatis maiores? Quas similique voluptatum fugiat deleniti voluptas corporis, aliquam earum?</p>
-                            <a href="/conference.html" class="card__link">read more</a>
-                        </div>
                     </div>
 
                     <div class="wrapper__my-confs">
-                        <h1>My Conferences</h1>
+                        <h1>Subscribed-to Conferences</h1>
                         <th:block th:each = "conf : ${subscribedConfs}">
                             <div class="wrapper__conf-card">
                                 <h3>Title : </h3>
-                                <p class="card__text">${conf.title}</p>
+                                <p class="card__text" th:text="${conf.title}"></p>
                                 <h3>Date : </h3>
-                                <p class="card__text">${conf.date}</p>
+                                <p class="card__text" th:text="${conf.date}"></p>
                                 <h3>Description : </h3>
-                                <p class="card__text">${conf.description}</p>
+                                <p class="card__text" th:text="${conf.description}"></p>
                                 <a href="/conference.html" class="card__link">read more</a>
                             </div>
                         </th:block>
@@ -187,11 +158,11 @@
                             <th:block th:each = "conf : ${browseConfs}">
                                 <div class="wrapper__conf-card">
                                     <h3>Title : </h3>
-                                    <p class="card__text">${conf.title}</p>
+                                    <p class="card__text" th:text="${conf.title}"></p>
                                     <h3>Date : </h3>
-                                    <p class="card__text">${conf.date}</p>
+                                    <p class="card__text" th:text="${conf.date}"></p>
                                     <h3>Description : </h3>
-                                    <p class="card__text">${conf.description}</p>
+                                    <p class="card__text" th:text="${conf.description}"></p>
                                     <a href="/conference.html" class="card__link">read more</a>
                                 </div>
                             </th:block>

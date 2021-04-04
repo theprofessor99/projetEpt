@@ -11,10 +11,10 @@ import java.util.Collection;
 
 public interface ConferenceRepository extends CrudRepository<Conference, Long> {
 
-    @Query("SELECT c FROM Conference c WHERE c.admin.username = ?1")
-    Collection<Conference> findConferenceByAdmin(String username);
+    @Query("SELECT c FROM Conference c WHERE c.admin.email = ?1")
+    Collection<Conference> findConferenceByAdmin(String email);
 
-    @Query("SELECT c FROM Conference c JOIN c.participants p WHERE p.username = ?1")
+    @Query("SELECT c FROM Conference c JOIN c.participants p WHERE p.email = ?1")
     Collection<Conference> findConferenceByParticipant(String participant);
 
 }

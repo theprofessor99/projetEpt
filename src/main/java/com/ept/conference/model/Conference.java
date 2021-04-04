@@ -1,6 +1,7 @@
 package com.ept.conference.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
@@ -14,7 +15,7 @@ public class Conference {
     private Long id;
 
     private String title;
-    private LocalDateTime date;
+    private LocalDate date;
     private String description;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -41,7 +42,7 @@ public class Conference {
     public Conference() {
     }
 
-    public Conference(String title, LocalDateTime date, String description) {
+    public Conference(String title, LocalDate date, String description) {
         this.title = title;
         this.date = date;
         this.description = description;
@@ -63,11 +64,11 @@ public class Conference {
         this.title = title;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

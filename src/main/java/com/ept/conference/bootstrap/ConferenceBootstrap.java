@@ -3,10 +3,14 @@ package com.ept.conference.bootstrap;
 import com.ept.conference.controller.dto.UserRegistrationDto;
 import com.ept.conference.model.*;
 import com.ept.conference.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 
 @Component
@@ -32,10 +36,13 @@ public class ConferenceBootstrap implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        /*User oussama = new UserRegistrationDto("oussama", "oussamamaster0@gmail.com", "password", );
-        User houssem = new User("houssem", "houssemmaster0@gmail.com", "password");
-        User rami = new User("rami", "ramimaster0@gmail.com", "password");
-        User kammoun = new User("kammoun", "kammounmaster0@gmail.com", "password");
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        User oussama = new User("oussama", "oussamamaster0@gmail.com", "afd",bCryptPasswordEncoder.encode("password"), Arrays.asList(new Role("ROLE_USER")));
+        User houssem = new User("houssem", "afd@g.c", "fdd", bCryptPasswordEncoder.encode("password"), Arrays.asList(new Role("ROLE_USER")));
+        User rami = new User("rami", "afsdd@g.c", "fdd", bCryptPasswordEncoder.encode("password"), Arrays.asList(new Role("ROLE_USER")));
+        User kammoun = new User("kammoun", "afdfd@g.c", "fdd", bCryptPasswordEncoder.encode("password"), Arrays.asList(new Role("ROLE_USER")));
+
+
 
         Article article1 = new Article("article1", "hfdjmqf");
         article1.getReviewers().add(houssem);
@@ -52,7 +59,7 @@ public class ConferenceBootstrap implements CommandLineRunner {
 
         Tutorial tutorial1 = new Tutorial("tutorial1", "dmqmkfjmq");
 
-        Conference conference1 = new Conference("conf1", LocalDateTime.now(), "hfmdjfq");
+        Conference conference1 = new Conference("conf1", LocalDate.now(), "hfmdjfq");
 
 
         session1.getArticles().add(article1);
@@ -85,6 +92,6 @@ public class ConferenceBootstrap implements CommandLineRunner {
 
         System.out.println("articles " + articleRepository.count());
 
-        conferenceRepository.findAll().forEach(conference -> System.out.println(conference.getTitle()));*/
+        conferenceRepository.findAll().forEach(conference -> System.out.println(conference.getTitle()));
     }
 }

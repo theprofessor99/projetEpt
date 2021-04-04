@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,23 +80,24 @@
                 <main class="hotel-view">
                   <h1 style="margin-left: 3rem;">My articles</h1>
                     <div style="margin-bottom: 10rem;"></div>
+                    <th:block th:each = "article : ${myArticles}">
+                        <div class="card_bloc">
+                            <span class="article_title" th:text="${article.title}"></span>
+                            <form th:method="get" th:action="@{/edit(id = ${article.id})}">
+                            <button type="submit" class="btn btn-secondary">Edit</button>
+                            </form>
+                        </div>
+                    </th:block>
+
                   <h1 style="margin-left: 3rem;">Articles to Rate</h1>
-                  <div class="card_bloc">
-                    <span class="article_title">Tuna</span>
-                    <button class="btn btn-secondary" onclick='location.href="/article.html"'>Rate</button>
-                  </div>
-                  <div class="card_bloc">
-                    <span class="article_title">energy</span>
-                    <button class="btn btn-secondary">Rate</button>
-                  </div>
-                  <div class="card_bloc">
-                    <span class="article_title">engineering</span>
-                    <button class="btn btn-secondary">Rate</button>
-                  </div>
-                  <div class="card_bloc">
-                    <span class="article_title">5G</span>
-                    <button class="btn btn-secondary">Rate</button>
-                  </div>
+                    <th:block th:each = "article : ${toReviewArticles}">
+                        <div class="card_bloc">
+                            <span class="article_title" th:text="${article.title}"></span>
+                            <form th:method="post"th:action="@{/rate(id=${article.id})}">
+                                <button type="submit" class="btn btn-secondary">Rate</button>
+                            </form>
+                        </div>
+                    </th:block>
                 </main>
             </div>
         </div>
