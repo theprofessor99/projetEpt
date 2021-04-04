@@ -12,28 +12,24 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/rateArticle/{id}")
-public class RateArticleController {
+@RequestMapping("/rate/{id}")
+public class RateController {
 
     public final ArticleRepository articleRepository;
     public final UserRepository userRepository;
     public final RateArticleService rateArticleService;
 
-    public RateArticleController(ArticleRepository articleRepository, RateArticleService rateArticleService, UserRepository userRepository) {
+    public RateController(ArticleRepository articleRepository, RateArticleService rateArticleService, UserRepository userRepository) {
         this.articleRepository = articleRepository;
         this.userRepository = userRepository;
         this.rateArticleService = rateArticleService;
     }
 
-    @PostMapping
-    public String rateArticle(@PathVariable("id") Long id,@RequestParam("rating") float rating, Model model, Principal principal) {
-        Article article = articleRepository.findById(id).get();
-        String email = principal.getName();
-        User user = userRepository.findByEmail(email);
+    @GetMapping
+    public String ratePage(@PathVariable("id") Long id, Model model){
 
-        rateArticleService.rateArticle(article, user, rating);
+        model.addAttribute("article", articleRepository.findById(id).get());
 
-        return "redirect:/articleList";
-
+        return "article";
     }
 }

@@ -17,7 +17,7 @@ public class User {
     private String Speciality;
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "admin_id")
     private Set<Conference> conferences = new HashSet<Conference>();
 
@@ -32,7 +32,7 @@ public class User {
     @ManyToMany(mappedBy = "reviewers")
     private Set<Article> toReviewArticles = new HashSet<Article>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "tutorial_id")
     private Set<Tutorial> tutorial = new HashSet<Tutorial>();
 
@@ -41,6 +41,10 @@ public class User {
 
     public User() {
     }
+
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "user_id")
+    private Set<RateArticle> rateArticles = new HashSet<RateArticle>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -170,6 +174,14 @@ public class User {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<RateArticle> getRateArticles() {
+        return rateArticles;
+    }
+
+    public void setRateArticles(Set<RateArticle> rateArticles) {
+        this.rateArticles = rateArticles;
     }
 
     @Override

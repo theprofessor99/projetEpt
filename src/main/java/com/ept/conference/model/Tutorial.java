@@ -15,7 +15,7 @@ public class Tutorial {
     private String desc;
     private String status;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Conference conference;
 
     @ManyToMany
@@ -23,7 +23,7 @@ public class Tutorial {
         inverseJoinColumns = @JoinColumn(name = "participant_id"))
     private Set<User> participants = new HashSet<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private User tutor;
 
     public Tutorial() {

@@ -83,8 +83,8 @@
                     <th:block th:each = "article : ${myArticles}">
                         <div class="card_bloc">
                             <span class="article_title" th:text="${article.title}"></span>
-                            <form th:method="get" th:action="@{/edit(id = ${article.id})}">
-                            <button type="submit" class="btn btn-secondary">Edit</button>
+                            <form th:method="get" th:action="@{/view/{id}(id = ${article.id})}">
+                            <button type="submit" class="btn btn-secondary">View</button>
                             </form>
                         </div>
                     </th:block>
@@ -93,7 +93,7 @@
                     <th:block th:each = "article : ${toReviewArticles}">
                         <div class="card_bloc">
                             <span class="article_title" th:text="${article.title}"></span>
-                            <form th:method="post"th:action="@{/rate(id=${article.id})}">
+                            <form th:method="GET"th:action="@{/rate/{id}(id=${article.id})}">
                                 <button type="submit" class="btn btn-secondary">Rate</button>
                             </form>
                         </div>

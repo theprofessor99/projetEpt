@@ -17,9 +17,12 @@ public class Theme {
             inverseJoinColumns = @JoinColumn(name = "article_id"))
     private Set<Article> articles = new HashSet<Article>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "theme_id")
+
+    @ManyToMany
+    @JoinTable(name = "theme_session", joinColumns = @JoinColumn(name = "theme_id"),
+            inverseJoinColumns = @JoinColumn(name = "session_id"))
     private Set<Session> sessions = new HashSet<>();
+
     public Theme() {
     }
 

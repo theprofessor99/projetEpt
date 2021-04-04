@@ -18,7 +18,7 @@ public class Conference {
     private LocalDate date;
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private User admin;
 
     @ManyToMany
@@ -31,13 +31,17 @@ public class Conference {
         inverseJoinColumns = @JoinColumn(name = "reviewer_id"))
     private Set<User> reviewers = new HashSet<User>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "conference_id")
     private Set<Tutorial> tutorials = new HashSet<Tutorial>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "conference_id")
     private Set<Session> sessions = new HashSet<Session>();
+
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "conference_id")
+    private Set<Article> articles = new HashSet<Article>();
 
     public Conference() {
     }
@@ -120,6 +124,13 @@ public class Conference {
         this.sessions = sessions;
     }
 
+    public Set<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Set<Article> articles) {
+        this.articles = articles;
+    }
 
     @Override
     public boolean equals(Object o) {

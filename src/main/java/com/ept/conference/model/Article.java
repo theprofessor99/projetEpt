@@ -20,7 +20,8 @@ public class Article {
 
     @ManyToMany(mappedBy = "articles")
     private Set<Theme> themes = new HashSet<Theme>();
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Session session;
 
     @ManyToMany
@@ -28,10 +29,17 @@ public class Article {
         inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<User> authors = new HashSet<User>();
 
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "article_id")
+    private Set<RateArticle> articles = new HashSet<>();
+
     @ManyToMany
     @JoinTable(name = "article_reviewer", joinColumns = @JoinColumn(name = "article_id"),
         inverseJoinColumns = @JoinColumn(name = "reviewer_id"))
     private Set<User> reviewers = new HashSet<User>();
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Conference conference;
 
     public Article() {
     }
@@ -104,6 +112,22 @@ public class Article {
 
     public void setReviewers(Set<User> reviewers) {
         this.reviewers = reviewers;
+    }
+
+    public Set<RateArticle> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Set<RateArticle> articles) {
+        this.articles = articles;
+    }
+
+    public Conference getConference() {
+        return conference;
+    }
+
+    public void setConference(Conference conference) {
+        this.conference = conference;
     }
 
     @Override
