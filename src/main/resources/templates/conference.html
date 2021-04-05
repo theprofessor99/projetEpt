@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,21 +10,21 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
         
         <title>trillo &mdash; Your all-in-one booking app</title>
     </head>
     <body>
         <div class="main_container">
             <header class="header">
-                <img src="img/logo.png" alt="trillo logo" class="logo">
+                <img src="/img/logo.png" alt="trillo logo" class="logo">
 
                 <form action="#" class="search">
                     <input type="text" class="search__input" placeholder="Search hotels">
                     <button class="search__button">
                         <svg class="search__icon">
-                            <use xlink:href="img/sprite.svg#icon-magnifying-glass"></use>
+                            <use xlink:href="/img/sprite.svg#icon-magnifying-glass"></use>
                         </svg>
                     </button>
                 </form>
@@ -32,18 +32,18 @@
                 <nav class="user-nav">
                     <div class="user-nav__icon-box">
                         <svg class="user-nav__icon">
-                            <use xlink:href="img/sprite.svg#icon-bookmark"></use>
+                            <use xlink:href="/img/sprite.svg#icon-bookmark"></use>
                         </svg>
                         <span class="user-nav__notification">7</span>
                     </div>
                     <div class="user-nav__icon-box">
                         <svg class="user-nav__icon">
-                            <use xlink:href="img/sprite.svg#icon-chat"></use>
+                            <use xlink:href="/img/sprite.svg#icon-chat"></use>
                         </svg>
                         <span class="user-nav__notification">13</span>
                     </div>
                     <div class="user-nav__user">
-                        <img src="img/user.jpg" alt="User photo" class="user-nav__user-photo">
+                        <img src="/img/user.jpg" alt="User photo" class="user-nav__user-photo">
                         <span class="user-nav__user-name">oussama</span>
                     </div>
                 </nav>
@@ -81,26 +81,30 @@
                     <div class="wrapper">
                       <h1>Informations</h1>
                       <h3 class="conf__info">Title:</h3>
-                      <p class="desc__text">dummy conf</p>
+                      <p class="desc__text" th:text="${conference.title}"></p>
                       <h3 class="conf__info">Start date:</h3>
-                      <p class="desc__text">01/01/2022</p>
+                      <p class="desc__text" th:text="${conference.date}"></p>
                       <h3 class="conf__info">Description: </h3>
-                      <p class="desc__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, cumque nisi, laboriosam neque iure laudantium reiciendis deserunt libero temporibus aspernatur dicta eos? Totam consequatur aliquam nostrum animi earum veniam quibusdam.</p>
+                      <p class="desc__text" th:text="${conference.description}"></p>
 
-                      <form action="/payment.html" method="GET" style="margin-left: 2rem;">
+                      <form action="/payment.html" method="GET" style="margin-left: 2rem;" th:if="${!admin and !sub}">
                         <button type="submit" class="btn btn-primary">subscribe</button>
                       </form>
-                      <form action="/addArticle.html" style="margin-left: 2rem;margin-top: 1rem;">
+                      <form action="/addArticle.html" style="margin-left: 2rem;margin-top: 1rem;" th:if="${admin or sub}">
                           <button class="btn btn-success">
                               add article
                           </button>
                       </form>
-                      <form action="addTuto.html" method="GET" style="margin-left: 2rem;margin-top: 1rem;">
+                      <form action="addTuto.html" method="GET" style="margin-left: 2rem;margin-top: 1rem;" th:if="${user.speciality != null}">
                         <button class="btn btn-success">
                             create tutorial
                         </button>
-                    </form>
-                    </div>
+                      </form>
+                        </div>
+
+                    <th:block th:each = "day : ${days}">
+                        <p th:text = "${day.tutorial.getTitle()}"></p>
+                    </th:block>
 
                     <div class="container">
                       <h1 id="timeline_header">Timeline</h1>
@@ -113,7 +117,7 @@
                   
                   </div>
                   <div class="row timeline-movement">
-                  
+
                       <div class="timeline-badge">
                           <span class="timeline-balloon-date-day">10</span>
                           <span class="timeline-balloon-date-month">APR</span>
@@ -131,7 +135,7 @@
                                           <li><span class="causale"><span id="tuto">description :</span>  Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi eaque at quas dolorem neque. Eaque a, similique tenetur</span> </li>
                                           <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
                                           <form action="/payment.html" method="GET">
-                                          <button class="btn btn-primary">
+                                          <button class="btn btn-primary" th:if="${!admin}">
                                               attend
                                           </button>
                                         </form>

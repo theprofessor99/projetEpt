@@ -1,6 +1,7 @@
 package com.ept.conference.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ public class Tutorial {
     private String title;
     private String desc;
     private String status;
+    private LocalDateTime date;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     private Conference conference;
@@ -89,6 +91,14 @@ public class Tutorial {
 
     public void setTutor(User tutor) {
         this.tutor = tutor;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
     @Override

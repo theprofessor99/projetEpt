@@ -133,7 +133,7 @@
                                     <p class="card__text" th:text="${conf.date}"></p>
                                     <h3>Description : </h3>
                                     <p class="card__text" th:text="${conf.description}"></p>
-                                    <a href="/conference.html" class="card__link">read more</a>
+                                    <a th:href="@{/conference/{id}(id = ${conf.getId()})}" class="card__link">read more</a>
                                 </div>
                             </th:block>
                     </div>
@@ -148,7 +148,7 @@
                                 <p class="card__text" th:text="${conf.date}"></p>
                                 <h3>Description : </h3>
                                 <p class="card__text" th:text="${conf.description}"></p>
-                                <a href="/conference.html" class="card__link">read more</a>
+                                <a th:href="@{/conference/{id}(id = ${conf.getId()})}" class="card__link">read more</a>
                             </div>
                         </th:block>
                     </div>
@@ -163,7 +163,7 @@
                                     <p class="card__text" th:text="${conf.date}"></p>
                                     <h3>Description : </h3>
                                     <p class="card__text" th:text="${conf.description}"></p>
-                                    <a href="/conference.html" class="card__link">read more</a>
+                                    <a th:href="@{/conference/{id}(id = ${conf.getId()})}" class="card__link">read more</a>
                                 </div>
                             </th:block>
                         </div>

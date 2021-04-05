@@ -2,11 +2,14 @@ package com.ept.conference.bootstrap;
 
 import com.ept.conference.model.*;
 import com.ept.conference.repositories.*;
+import com.ept.conference.service.DayService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -124,5 +127,32 @@ public class ConferenceBootstrap implements CommandLineRunner {
         kammoun.getToReviewArticles().add(article2);
 
         articleRepository.save(article2);
+
+        User houssem = new User("houssem", "afd@g.c", bCryptPasswordEncoder.encode("1"), Arrays.asList(new Role("ROLE_USER")));
+        userRepository.save(houssem);
+
+        Tutorial tutorial1 = new Tutorial("tutorial1", "dmqmkfjmq");
+        tutorial1.setDate(LocalDateTime.now().plusDays(1));
+        Tutorial tutorial2 = new Tutorial("tutorial2", "dmqmkfjmq");
+        tutorial1.setDate(LocalDateTime.now().plusDays(2));
+        Tutorial tutorial3 = new Tutorial("tutorial3", "dmqmkfjmq");
+        tutorial1.setDate(LocalDateTime.now().plusDays(5));
+        Tutorial tutorial4 = new Tutorial("tutorial4", "dmqmkfjmq");
+        tutorial1.setDate(LocalDateTime.now().plusDays(4));
+
+        conference1.getTutorials().add(tutorial1);
+        tutorial1.setConference(conference1);
+        conference1.getTutorials().add(tutorial2);
+        tutorial2.setConference(conference1);
+        conference1.getTutorials().add(tutorial3);
+        tutorial3.setConference(conference1);
+        conference1.getTutorials().add(tutorial4);
+        tutorial4.setConference(conference1);
+
+        tutorialRepository.save(tutorial1);
+        tutorialRepository.save(tutorial2);
+        tutorialRepository.save(tutorial3);
+        tutorialRepository.save(tutorial4);
+
     }
 }
