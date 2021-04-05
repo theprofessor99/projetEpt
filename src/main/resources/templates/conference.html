@@ -102,10 +102,6 @@
                       </form>
                         </div>
 
-                    <th:block th:each = "day : ${days}">
-                        <p th:text = "${day.tutorial.getTitle()}"></p>
-                    </th:block>
-
                     <div class="container">
                       <h1 id="timeline_header">Timeline</h1>
                     <div id="timeline"><div class="row timeline-movement timeline-movement-top">
@@ -118,237 +114,149 @@
                   </div>
                   <div class="row timeline-movement">
 
-                      <div class="timeline-badge">
-                          <span class="timeline-balloon-date-day">10</span>
-                          <span class="timeline-balloon-date-month">APR</span>
-                      </div>
-                  
-                  
-                      <div class="col-sm-6  timeline-item">
-                          <div class="row">
-                              <div class="col-sm-11">
-                                  <div class="timeline-panel credits">
-                                      <ul class="timeline-panel-ul">
-                                          <li><span class="importo">Tutorial 1</span></li>
-                                          <li><span id="tuto">tutor :</span> yomna</li>
-                                          <li><span class="causale"><span id="tuto">Title: </span>cours math de l'ingenieur </span> </li>
-                                          <li><span class="causale"><span id="tuto">description :</span>  Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi eaque at quas dolorem neque. Eaque a, similique tenetur</span> </li>
-                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
-                                          <form action="/payment.html" method="GET">
-                                          <button class="btn btn-primary" th:if="${!admin}">
-                                              attend
-                                          </button>
-                                        </form>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6  timeline-item">
-                          <div class="row">
-                              <div class="col-sm-offset-1 col-sm-11">
-                                  <div class="timeline-panel debits">
-                                      <ul class="timeline-panel-ul">
-                                          <li><span class="importo">session 1</span></li>
-                                          <li><span class="causale">theme : energy</span> </li>
-                                          <li><span class="causale">article 1 : solar</span> </li>
-                                          <a href="/article.html">check</a>
-                                          <li><span class="causale">article 2 : wind</span> </li>
-                                          <a href="/article.html">check</a>
-                                          <li><span class="causale">article 3 : hydro</span> </li>
-                                          <a href="/article.html">check</a>
-                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6  timeline-item">
-                        <div class="row">
-                            <div class="col-sm-11">
-                                <div class="timeline-panel credits">
-                                    <ul class="timeline-panel-ul">
-                                        <li><span class="importo">Tutorial 1</span></li>
-                                        <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                        <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 10:30 am</small></p> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                      <div class="col-sm-6  timeline-item">
-                        <div class="row">
-                            <div class="col-sm-offset-1 col-sm-11">
-                                <div class="timeline-panel debits">
-                                    <ul class="timeline-panel-ul">
-                                        <li><span class="importo">session 2</span></li>
-                                        <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                        <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 10:30 am</small></p> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6  timeline-item">
-                        <div class="row">
-                            <div class="col-sm-11">
-                                <div class="timeline-panel credits">
-                                    <ul class="timeline-panel-ul">
-                                        <li><span class="importo">Tutorial 3</span></li>
-                                        <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                        <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 14:00 am</small></p> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6  timeline-item">
-                      <div class="row">
-                          <div class="col-sm-offset-1 col-sm-11">
-                              <div class="timeline-panel debits">
-                                  <ul class="timeline-panel-ul">
-                                      <li><span class="importo">session 3</span></li>
-                                      <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                      <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 14:00 am</small></p> </li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-sm-6  timeline-item">
-                    <div class="row">
-                        <div class="col-sm-11">
-                            <div class="timeline-panel credits">
-                                <ul class="timeline-panel-ul">
-                                    <li><span class="importo">Tutorial 4</span></li>
-                                    <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                    <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 15:30 am</small></p> </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                  <div class="col-sm-6  timeline-item">
-                    <div class="row">
-                        <div class="col-sm-offset-1 col-sm-11">
-                            <div class="timeline-panel debits">
-                                <ul class="timeline-panel-ul">
-                                    <li><span class="importo">session 4</span></li>
-                                    <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                    <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 15:30 am</small></p> </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                      <th:block th:each ="day : ${days}">
+                          <p th:text="${day.s}"></p>
+                      </th:block>
 
-                  </div>
-                  
-                  <!--due -->
-                  
-                  <div class="row timeline-movement">
-                  
-                  
-                      <div class="timeline-badge">
-                          <span class="timeline-balloon-date-day">11</span>
-                          <span class="timeline-balloon-date-month">APR</span>
-                      </div>
-                  
-                      <div class="col-sm-offset-6 col-sm-6  timeline-item">
-                          <div class="row">
-                              <div class="col-sm-offset-1 col-sm-11">
-                                  <div class="timeline-panel debits">
-                                      <ul class="timeline-panel-ul">
-                                          <li><span class="importo">session 1</span></li>
-                                          <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
-                                      </ul>
+                      <th:block th:each = "day : ${days}">
+
+                          <div class="timeline-badge">
+                              <span class="timeline-balloon-date-day">day.getDate().getDay()</span>
+                              <span class="timeline-balloon-date-month">day.getDate().format(formatter)</span>
+                          </div>
+
+                          <div class="col-sm-6  timeline-item">
+                              <div class="row">
+                                  <div class="col-sm-offset-1 col-sm-11">
+                                      <div class="timeline-panel debits">
+                                          <ul class="timeline-panel-ul">
+                                              <li><span class="importo">session 1</span></li>
+                                              <li><span class="causale">theme : </span>
+                                                    <th:block th:each = "theme : ${day.sessions[0].getThemes()}">
+                                                        <span th:text="${theme.getName()}"></span>
+                                                    </th:block>
+                                              </li>
+                                              <th:block th:each = "article : ${day.getSessions()[0].getArticles()}">
+                                                  <li><span class="causale" th:text="'article : ' ${article.getTitle()}"></span> </li>
+                                                  <a th:href="@{/view/{id}(id = ${article.getId()})}">check</a>
+                                              </th:block>
+                                              <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>
+                                                  <span th:text="${day.getSessions()[0].getDate().getHour()}':'${day.getSessions()[0].getDate().getMinute()} 'am'">
+
+                                                    </span>
+                                              </small></p></li>
+                                          </ul>
+                                      </div>
                                   </div>
-                  
                               </div>
                           </div>
-                      </div>
-                      <div class="col-sm-6  timeline-item">
-                          <div class="row">
-                              <div class="col-sm-11">
-                                  <div class="timeline-panel credits">
-                                      <ul class="timeline-panel-ul">
-                                          <li><span class="importo">tutorial 1</span></li>
-                                          <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 14:00</small></p> </li>
-                                      </ul>
+
+
+                          <div class="col-sm-6  timeline-item">
+                              <div class="row">
+                                  <div class="col-sm-11">
+                                      <div class="timeline-panel credits">
+                                          <ul class="timeline-panel-ul">
+                                              <li><span class="importo">Tutorial :</span></li>
+                                              <li><span id="tuto">tutor :</span><span th:text="${day.getTutorial().getTutor()}"></span></li>
+                                              <li><span id="tuto">Title: </span><span th:text="${day.getTutorial().getTitle()}"></span> </li>
+                                              <li><span id="tuto">description :</span><span th:text="${day.getTutorial().getDesc()}"></span> </li>
+                                              <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
+                                              <form action="/payment.html" method="GET">
+                                                  <button class="btn btn-primary" th:if="${!admin}">
+                                                      attend
+                                                  </button>
+                                              </form>
+                                          </ul>
+                                      </div>
                                   </div>
-                  
                               </div>
                           </div>
-                      </div>
-                      <div class="col-sm-offset-6 col-sm-6  timeline-item">
-                        <div class="row">
-                            <div class="col-sm-offset-1 col-sm-11">
-                                <div class="timeline-panel debits">
-                                    <ul class="timeline-panel-ul">
-                                        <li><span class="importo">session 2</span></li>
-                                        <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                        <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 14:00</small></p> </li>
-                                    </ul>
-                                </div>
-                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6  timeline-item">
-                        <div class="row">
-                            <div class="col-sm-11">
-                                <div class="timeline-panel credits">
-                                    <ul class="timeline-panel-ul">
-                                        <li><span class="importo">tutorial 2</span></li>
-                                        <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                        <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 15:30 pm</small></p> </li>
-                                    </ul>
-                                </div>
-                
-                            </div>
-                        </div>
-                    </div>
-                  
-                  
-                  </div>
-                  <div class="row timeline-movement">
-                  
-                  
-                      <div class="timeline-badge">
-                          <span class="timeline-balloon-date-day">12</span>
-                          <span class="timeline-balloon-date-month">APR</span>
-                      </div>
-                  
-                      <div class="col-sm-offset-6 col-sm-6  timeline-item">
-                          <div class="row">
-                              <div class="col-sm-offset-1 col-sm-11">
-                                  <div class="timeline-panel debits">
-                                      <ul class="timeline-panel-ul">
-                                          <li><span class="importo">session 1</span></li>
-                                          <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
-                                      </ul>
+
+
+                          <div class="col-sm-6  timeline-item">
+                              <div class="row">
+                                  <div class="col-sm-offset-1 col-sm-11">
+                                      <div class="timeline-panel debits">
+                                          <ul class="timeline-panel-ul">
+                                              <li><span class="importo">session 2</span></li>
+                                              <li><span class="causale">theme : </span>
+                                                  <th:block th:each = "theme : ${day.getSessions()[1].getThemes()}">
+                                                      <span th:text="${theme.getName()}"></span>
+                                                  </th:block>
+                                              </li>
+                                              <th:block th:each = "article : ${day.getSessions()[1].getArticles()}">
+                                                  <li><span class="causale" th:text="'article : ' ${article.getTitle()}"></span> </li>
+                                                  <a th:href="@{/view/{id}(id = ${article.getId()})}">check</a>
+                                              </th:block>
+                                              <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>
+                                                  <span th:text="${day.getSessions()[1].getDate().getHour()}':'${day.getSessions()[1].getDate().getMinute()} 'am'">
+
+                                                    </span>
+                                              </small></p></li>
+                                          </ul>
+                                      </div>
                                   </div>
-                  
                               </div>
                           </div>
-                      </div>
-                      <div class="col-sm-offset-6 col-sm-6  timeline-item">
-                          <div class="row">
-                              <div class="col-sm-offset-1 col-sm-11">
-                                  <div class="timeline-panel debits">
-                                      <ul class="timeline-panel-ul">
-                                          <li><span class="importo">session 2</span></li>
-                                          <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 10:30 am</small></p> </li>
-                                      </ul>
+
+
+
+                          <div class="col-sm-6  timeline-item">
+                              <div class="row">
+                                  <div class="col-sm-offset-1 col-sm-11">
+                                      <div class="timeline-panel debits">
+                                          <ul class="timeline-panel-ul">
+                                              <li><span class="importo">session 1</span></li>
+                                              <li><span class="causale">theme : </span>
+                                                  <th:block th:each = "theme : ${day.getSessions()[2].getThemes()}">
+                                                      <span th:text="${theme.getName()}"></span>
+                                                  </th:block>
+                                              </li>
+                                              <th:block th:each = "article : ${day.getSessions()[2].getArticles()}">
+                                                  <li><span class="causale" th:text="'article : ' ${article.getTitle()}"></span> </li>
+                                                  <a th:href="@{/view/{id}(id = ${article.getId()})}">check</a>
+                                              </th:block>
+                                              <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>
+                                                  <span th:text="${day.getSessions()[2].getDate().getHour()}':'${day.getSessions()[2].getDate().getMinute()} 'am'">
+
+                                                    </span>
+                                              </small></p></li>
+                                          </ul>
+                                      </div>
                                   </div>
-                  
                               </div>
                           </div>
-                      </div>
+
+
+                          <div class="col-sm-6  timeline-item">
+                              <div class="row">
+                                  <div class="col-sm-offset-1 col-sm-11">
+                                      <div class="timeline-panel debits">
+                                          <ul class="timeline-panel-ul">
+                                              <li><span class="importo">session 1</span></li>
+                                              <li><span class="causale">theme : </span>
+                                                  <th:block th:each = "theme : ${day.getSessions()[2].getThemes()}">
+                                                      <span th:text="${theme.getName()}"></span>
+                                                  </th:block>
+                                              </li>
+                                              <th:block th:each = "article : ${day.getSessions()[2].getArticles()}">
+                                                  <li><span class="causale" th:text="'article : ' ${article.getTitle()}"></span> </li>
+                                                  <a th:href="@{/view/{id}(id = ${article.getId()})}">check</a>
+                                              </th:block>
+                                              <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>
+                                                  <span th:text="${day.getSessions()[2].getDate().getHour()}':'${day.getSessions()[2].getDate().getMinute()} 'am'">
+
+                                                    </span>
+                                              </small></p></li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                      </th:block>
+
                   </div>
                   </div>
                   </div>

@@ -3,6 +3,7 @@ package com.ept.conference.bootstrap;
 import com.ept.conference.model.*;
 import com.ept.conference.repositories.*;
 import com.ept.conference.service.DayService;
+import org.apache.tomcat.jni.Local;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -134,11 +135,11 @@ public class ConferenceBootstrap implements CommandLineRunner {
         Tutorial tutorial1 = new Tutorial("tutorial1", "dmqmkfjmq");
         tutorial1.setDate(LocalDateTime.now().plusDays(1));
         Tutorial tutorial2 = new Tutorial("tutorial2", "dmqmkfjmq");
-        tutorial1.setDate(LocalDateTime.now().plusDays(2));
+        tutorial2.setDate(LocalDateTime.now().plusDays(2));
         Tutorial tutorial3 = new Tutorial("tutorial3", "dmqmkfjmq");
-        tutorial1.setDate(LocalDateTime.now().plusDays(5));
+        tutorial3.setDate(LocalDateTime.now().plusDays(5));
         Tutorial tutorial4 = new Tutorial("tutorial4", "dmqmkfjmq");
-        tutorial1.setDate(LocalDateTime.now().plusDays(4));
+        tutorial4.setDate(LocalDateTime.now().plusDays(4));
 
         conference1.getTutorials().add(tutorial1);
         tutorial1.setConference(conference1);
@@ -153,6 +154,13 @@ public class ConferenceBootstrap implements CommandLineRunner {
         tutorialRepository.save(tutorial2);
         tutorialRepository.save(tutorial3);
         tutorialRepository.save(tutorial4);
+
+        Session session = new Session(LocalDateTime.now().plusDays(1), conference1);
+
+        session.getArticles().add(article2);
+        article2.setSession(session);
+
+        sessionRepository.save(session);
 
     }
 }

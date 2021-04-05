@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @Controller
@@ -47,10 +48,12 @@ public class ConferenceController {
         }
 
         ArrayList<DayService> days = DayService.getDays(conference);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM");
 
         model.addAttribute("conference", conference);
         model.addAttribute("user", user);
         model.addAttribute("days", days);
+        model.addAttribute("formatter", formatter);
 
         return "conference";
     }
