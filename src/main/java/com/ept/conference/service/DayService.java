@@ -4,22 +4,28 @@ import com.ept.conference.model.Conference;
 import com.ept.conference.model.Session;
 import com.ept.conference.model.Tutorial;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class DayService {
 
-    private Date date;
+    private LocalDate date = LocalDate.now();
     private Session[] sessions = new Session[4];
+    //private ArrayList<Session> sessions = new ArrayList<>();
     private Tutorial tutorial;
 
     public DayService() {
     }
 
-    public Date getDate() {
+    public DayService(LocalDate date) {
+        this.date = date;
+    }
+
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -30,6 +36,14 @@ public class DayService {
     public void setSessions(Session[] sessions) {
         this.sessions = sessions;
     }
+
+    /*public ArrayList<Session> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(ArrayList<Session> sessions) {
+        this.sessions = sessions;
+    }*/
 
     public Tutorial getTutorial() {
         return tutorial;
@@ -60,7 +74,7 @@ public class DayService {
 
         ArrayList<DayService> days = new ArrayList<>();
         ArrayList<DayService> bufferDays = new ArrayList<>();
-        ArrayList<Session> confSessions = new ArrayList<Session>(conference.getSessions());
+        ArrayList<Session> confSessions = new ArrayList<>(conference.getSessions());
 
         Collections.sort(confSessions, new SortByDate());
 
@@ -68,24 +82,25 @@ public class DayService {
         Collections.sort(confTutorials, new SortTutorialByDate());
 
         for(Tutorial tuto : confTutorials){
-            DayService day = new DayService();
+            DayService day = new DayService(LocalDate.from(tuto.getDate()));
             day.setTutorial(tuto);
             days.add(day);
         }
         int k = 0;
-        DayService day = new DayService();
+        DayService day = new DayService(conference.getDate());
         for(Session session : confSessions){
 
-            day.getSessions()[k] = session;
+            day.getSessions()[0] = session;
 
             if(k == 3){
                 k = 0;
                 bufferDays.add(day);
-                day = new DayService();
+                day = new DayService(LocalDate.from(session.getDate()));
             }else {
                 k++;
             }
         }
+        if(k != 3){ bufferDays.add(day);}
 
         if(bufferDays.size() < days.size()){
             for(int i = 0; i < bufferDays.size(); i++){

@@ -162,5 +162,6 @@ public class ConferenceBootstrap implements CommandLineRunner {
 
         sessionRepository.save(session);
 
+
     }
 }

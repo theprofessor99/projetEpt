@@ -112,37 +112,32 @@
                       </div>
                   
                   </div>
-                  <div class="row timeline-movement">
-
-                      <th:block th:each ="day : ${days}">
-                          <p th:text="*{day.getSessions()[0].getDate()}"></p>
-                      </th:block>
 
                       <th:block th:each = "day : ${days}">
 
+                          <div class="row timeline-movement">
                           <div class="timeline-badge">
-                              <span class="timeline-balloon-date-day">day.getDate().getDay()</span>
-                              <span class="timeline-balloon-date-month">day.getDate().format(formatter)</span>
+                              <span class="timeline-balloon-date-day" th:text="${day.getDate().getDayOfMonth()}"></span>
+                              <span class="timeline-balloon-date-month" th:text="${day.getDate().format(formatter)}"></span>
                           </div>
 
-                          <div class="col-sm-6  timeline-item">
+                          <div class="col-sm-6 col-sm-offset-6  timeline-item" th:if="${day.getSessions()[0] != null}">
                               <div class="row">
                                   <div class="col-sm-offset-1 col-sm-11">
                                       <div class="timeline-panel debits">
                                           <ul class="timeline-panel-ul">
                                               <li><span class="importo">session 1</span></li>
                                               <li><span class="causale">theme : </span>
-                                                    <th:block th:each = "theme : ${day.sessions[0].getThemes()}">
+                                                    <th:block th:each = "theme : ${day.getSessions[0].getThemes()}">
                                                         <span th:text="${theme.getName()}"></span>
                                                     </th:block>
                                               </li>
                                               <th:block th:each = "article : ${day.getSessions()[0].getArticles()}">
-                                                  <li><span class="causale" th:text="'article : ' ${article.getTitle()}"></span> </li>
+                                                  <li><span class="causale" th:text="'article : ' + ${article.getTitle()}"></span> </li>
                                                   <a th:href="@{/view/{id}(id = ${article.getId()})}">check</a>
                                               </th:block>
                                               <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>
-                                                  <span th:text="${day.getSessions()[0].getDate().getHour()}':'${day.getSessions()[0].getDate().getMinute()} 'am'">
-
+                                                  <span th:text="${day.getSessions()[0].getDate().getHour()} + ':' + ${day.getSessions()[0].getDate().getMinute()} +  ' am'">
                                                     </span>
                                               </small></p></li>
                                           </ul>
@@ -173,8 +168,14 @@
                               </div>
                           </div>
 
+                          <div class="col-sm-6 col-sm-offset-6 timeline-item" th:if="${day.getSessions()[1] == null}">
+                              <div class="row">
+                                  <div class="col-sm-offset-1 col-sm-11">
+                                  </div>
+                              </div>
+                          </div>
 
-                          <div class="col-sm-6  timeline-item">
+                          <div class="col-sm-6 col-sm-offset-6 timeline-item" th:if="${day.getSessions()[1] != null}">
                               <div class="row">
                                   <div class="col-sm-offset-1 col-sm-11">
                                       <div class="timeline-panel debits">
@@ -186,12 +187,11 @@
                                                   </th:block>
                                               </li>
                                               <th:block th:each = "article : ${day.getSessions()[1].getArticles()}">
-                                                  <li><span class="causale" th:text="'article : ' ${article.getTitle()}"></span> </li>
+                                                  <li><span class="causale" th:text="'article : ' + ${article.getTitle()}"></span> </li>
                                                   <a th:href="@{/view/{id}(id = ${article.getId()})}">check</a>
                                               </th:block>
                                               <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>
-                                                  <span th:text="${day.getSessions()[1].getDate().getHour()}':'${day.getSessions()[1].getDate().getMinute()} 'am'">
-
+                                                  <span th:text="${day.getSessions()[1].getDate().getHour()} + ':' + ${day.getSessions()[1].getDate().getMinute()} + ' am'">
                                                     </span>
                                               </small></p></li>
                                           </ul>
@@ -202,23 +202,23 @@
 
 
 
-                          <div class="col-sm-6  timeline-item">
+                          <div class="col-sm-6 col-sm-offset-6 timeline-item" th:if="${day.getSessions()[2] != null}">
                               <div class="row">
                                   <div class="col-sm-offset-1 col-sm-11">
                                       <div class="timeline-panel debits">
                                           <ul class="timeline-panel-ul">
-                                              <li><span class="importo">session 1</span></li>
+                                              <li><span class="importo">session 3</span></li>
                                               <li><span class="causale">theme : </span>
                                                   <th:block th:each = "theme : ${day.getSessions()[2].getThemes()}">
                                                       <span th:text="${theme.getName()}"></span>
                                                   </th:block>
                                               </li>
                                               <th:block th:each = "article : ${day.getSessions()[2].getArticles()}">
-                                                  <li><span class="causale" th:text="'article : ' ${article.getTitle()}"></span> </li>
+                                                  <li><span class="causale" th:text="'article : '  + ${article.getTitle()}"></span> </li>
                                                   <a th:href="@{/view/{id}(id = ${article.getId()})}">check</a>
                                               </th:block>
                                               <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>
-                                                  <span th:text="${day.getSessions()[2].getDate().getHour()}':'${day.getSessions()[2].getDate().getMinute()} 'am'">
+                                                  <span th:text="${day.getSessions()[2].getDate().getHour()} + ':' + ${day.getSessions()[2].getDate().getMinute()} + ' am'">
 
                                                     </span>
                                               </small></p></li>
@@ -229,23 +229,23 @@
                           </div>
 
 
-                          <div class="col-sm-6  timeline-item">
+                          <div class="col-sm-6 col-sm-offset-6 timeline-item" th:if="${day.getSessions()[3] != null}">
                               <div class="row">
                                   <div class="col-sm-offset-1 col-sm-11">
                                       <div class="timeline-panel debits">
                                           <ul class="timeline-panel-ul">
-                                              <li><span class="importo">session 1</span></li>
+                                              <li><span class="importo">session 4</span></li>
                                               <li><span class="causale">theme : </span>
                                                   <th:block th:each = "theme : ${day.getSessions()[2].getThemes()}">
                                                       <span th:text="${theme.getName()}"></span>
                                                   </th:block>
                                               </li>
                                               <th:block th:each = "article : ${day.getSessions()[2].getArticles()}">
-                                                  <li><span class="causale" th:text="'article : ' ${article.getTitle()}"></span> </li>
+                                                  <li><span class="causale" th:text="'article : ' + ${article.getTitle()}"></span> </li>
                                                   <a th:href="@{/view/{id}(id = ${article.getId()})}">check</a>
                                               </th:block>
                                               <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>
-                                                  <span th:text="${day.getSessions()[2].getDate().getHour()}':'${day.getSessions()[2].getDate().getMinute()} 'am'">
+                                                  <span th:text="${day.getSessions()[2].getDate().getHour()} + ':' + ${day.getSessions()[2].getDate().getMinute()} + ' am'">
 
                                                     </span>
                                               </small></p></li>
@@ -254,10 +254,9 @@
                                   </div>
                               </div>
                           </div>
-
+                          </div>
                       </th:block>
 
-                  </div>
                   </div>
                   </div>
                 </main>

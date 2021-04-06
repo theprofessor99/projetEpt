@@ -1,6 +1,7 @@
 package com.ept.conference.controller;
 
 import com.ept.conference.model.Conference;
+import com.ept.conference.model.Session;
 import com.ept.conference.model.User;
 import com.ept.conference.repositories.ConferenceRepository;
 import com.ept.conference.repositories.UserRepository;
@@ -48,6 +49,15 @@ public class ConferenceController {
         }
 
         ArrayList<DayService> days = DayService.getDays(conference);
+
+        /*ArrayList<Integer> index = new ArrayList<>();
+        int k = 0;
+        for(DayService day : days) {
+            index.add(k);
+            k++;
+        }*/
+
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM");
 
         model.addAttribute("conference", conference);
