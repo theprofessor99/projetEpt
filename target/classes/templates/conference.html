@@ -90,7 +90,15 @@
                       <form action="/payment.html" method="GET" style="margin-left: 2rem;" th:if="${!admin and !sub}">
                         <button type="submit" class="btn btn-primary">subscribe</button>
                       </form>
-                      <form action="/addArticle.html" style="margin-left: 2rem;margin-top: 1rem;" th:if="${admin or sub}">
+                        <form action="/payment.html" method="GET" style="margin-left: 2rem;" th:if="${sub}">
+                            <button type="submit" disabled class="btn btn-primary">subscribed</button>
+                        </form>
+
+                        <div class="alert alert-danger" th:if="${param.noSub}" style="margin-top: 2rem">
+                            please subscribe to add an article
+                        </div>
+
+                      <form th:action="@{/addArticle/{id}(id = ${conference.getId()})}" style="margin-left: 2rem;margin-top: 1rem;" th:if="${admin or sub}">
                           <button class="btn btn-success">
                               add article
                           </button>
@@ -147,7 +155,7 @@
                           </div>
 
 
-                          <div class="col-sm-6  timeline-item">
+                          <div class="col-sm-6  timeline-item" th:if="${day.getTutorial() != null}">
                               <div class="row">
                                   <div class="col-sm-11">
                                       <div class="timeline-panel credits">
@@ -175,7 +183,7 @@
                               </div>
                           </div>
 
-                          <div class="col-sm-6 col-sm-offset-6 timeline-item" th:if="${day.getSessions()[1] != null}">
+                          <div class="col-sm-6 timeline-item" th:if="${day.getSessions()[1] != null}">
                               <div class="row">
                                   <div class="col-sm-offset-1 col-sm-11">
                                       <div class="timeline-panel debits">

@@ -29,7 +29,7 @@ public class RateController {
     public String ratePage(@PathVariable("id") Long id, Model model){
 
         model.addAttribute("article", articleRepository.findById(id).get());
-
+        model.addAttribute("view", false);
         return "article";
     }
 }

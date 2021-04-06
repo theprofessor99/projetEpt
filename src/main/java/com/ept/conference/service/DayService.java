@@ -90,7 +90,7 @@ public class DayService {
         DayService day = new DayService(conference.getDate());
         for(Session session : confSessions){
 
-            day.getSessions()[0] = session;
+            day.getSessions()[k] = session;
 
             if(k == 3){
                 k = 0;

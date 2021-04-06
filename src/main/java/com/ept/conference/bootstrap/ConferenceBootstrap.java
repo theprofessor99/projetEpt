@@ -115,11 +115,8 @@ public class ConferenceBootstrap implements CommandLineRunner {
         conference1.getReviewers().add(kammoun);
         kammoun.getSupervisedConferences().add(conference1);
 
-        conferenceRepository.save(conference1);
-
-
-
         Article article2 = new Article("article2", "hfdjmqf");
+
         article2.getAuthors().add(oussama);
         oussama.getArticles().add(article2);
         article2.setConference(conference1);
@@ -131,6 +128,10 @@ public class ConferenceBootstrap implements CommandLineRunner {
 
         User houssem = new User("houssem", "afd@g.c", bCryptPasswordEncoder.encode("1"), Arrays.asList(new Role("ROLE_USER")));
         userRepository.save(houssem);
+
+        houssem.getSubscribedConferences().add(conference1);
+        conference1.getParticipants().add(houssem);
+
 
         Tutorial tutorial1 = new Tutorial("tutorial1", "dmqmkfjmq");
         tutorial1.setDate(LocalDateTime.now().plusDays(1));
@@ -155,13 +156,43 @@ public class ConferenceBootstrap implements CommandLineRunner {
         tutorialRepository.save(tutorial3);
         tutorialRepository.save(tutorial4);
 
-        Session session = new Session(LocalDateTime.now().plusDays(1), conference1);
+        Session session1 = new Session(LocalDateTime.now().plusDays(1), conference1);
 
-        session.getArticles().add(article2);
-        article2.setSession(session);
+        session1.getArticles().add(article2);
+        article2.setSession(session1);
 
-        sessionRepository.save(session);
+        Session session2 = new Session(LocalDateTime.now().plusDays(1).plusMinutes(10), conference1);
 
+        session2.getArticles().add(article2);
+        article2.setSession(session2);
+
+        Session session3 = new Session(LocalDateTime.now().plusDays(1).plusMinutes(20), conference1);
+
+        session3.getArticles().add(article2);
+        article2.setSession(session3);
+
+        Session session4 = new Session(LocalDateTime.now().plusDays(1).plusMinutes(30), conference1);
+
+        session4.getArticles().add(article2);
+        article2.setSession(session4);
+
+        Session session5 = new Session(LocalDateTime.now().plusDays(2), conference1);
+
+        session5.getArticles().add(article2);
+        article2.setSession(session5);
+
+        sessionRepository.save(session1);
+        sessionRepository.save(session2);
+        sessionRepository.save(session3);
+        sessionRepository.save(session4);
+        sessionRepository.save(session5);
+
+        conference1.getReviewers().add(oussama);
+        oussama.getSupervisedConferences().add(conference1);
+        conference1.getReviewers().add(houssem);
+        houssem.getSupervisedConferences().add(conference1);
+
+        conferenceRepository.save(conference1);
 
     }
 }

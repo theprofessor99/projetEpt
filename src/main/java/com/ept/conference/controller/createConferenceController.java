@@ -46,7 +46,7 @@ public class createConferenceController {
 
         ConfernceRegistrationService confernceRegistrationService = new ConfernceRegistrationService(userRepository, conferenceRepository);
 
-        ArrayList<String>[] commitee = new ArrayList[0];
+        ArrayList[] commitee = new ArrayList[0];
         try {
             commitee = confernceRegistrationService.createConference(title, date, description, users, admin);
         } catch (Exception e) {

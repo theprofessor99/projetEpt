@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,21 +9,23 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+
+        <script src = "/js/conference.js"></script>
         
         <title>trillo &mdash; Your all-in-one booking app</title>
     </head>
     <body>
         <div class="main_container">
             <header class="header">
-                <img src="img/logo.png" alt="trillo logo" class="logo">
+                <img src="/img/logo.png" alt="trillo logo" class="logo">
 
                 <form action="#" class="search">
                     <input type="text" class="search__input" placeholder="Search hotels">
                     <button class="search__button">
                         <svg class="search__icon">
-                            <use xlink:href="img/sprite.svg#icon-magnifying-glass"></use>
+                            <use xlink:href="/img/sprite.svg#icon-magnifying-glass"></use>
                         </svg>
                     </button>
                 </form>
@@ -31,18 +33,18 @@
                 <nav class="user-nav">
                     <div class="user-nav__icon-box">
                         <svg class="user-nav__icon">
-                            <use xlink:href="img/sprite.svg#icon-bookmark"></use>
+                            <use xlink:href="/img/sprite.svg#icon-bookmark"></use>
                         </svg>
                         <span class="user-nav__notification">7</span>
                     </div>
                     <div class="user-nav__icon-box">
                         <svg class="user-nav__icon">
-                            <use xlink:href="img/sprite.svg#icon-chat"></use>
+                            <use xlink:href="/img/sprite.svg#icon-chat"></use>
                         </svg>
                         <span class="user-nav__notification">13</span>
                     </div>
                     <div class="user-nav__user">
-                        <img src="img/user.jpg" alt="User photo" class="user-nav__user-photo">
+                        <img src="/img/user.jpg" alt="User photo" class="user-nav__user-photo">
                         <span class="user-nav__user-name">oussama</span>
                     </div>
                 </nav>
@@ -79,15 +81,62 @@
                 <main class="hotel-view">
                   <div class="wrapper__create" style="margin-left: 5rem;">
                     <h1>Add/Edit Article</h1>
-                    <form class="wrapper__form" action="/success.html" mathod="GET">
+                      <div class="alert alert-danger" th:if="${fail}">
+                          One or more users not found
+                      </div>
+                    <form class="wrapper__form" th:action="@{/createArticle/{id}(id = ${id})}" th:method="Post">
                         <label for="title">Title:</label><br>
-                        <input type="text" id="title" name="title"><br>
-                        <label for="themes">Themes</label><br>
-                        <input type="text" id="themes" name="themes"><br>
-                        <label for="writers">writers</label><br>
-                        <input type="writers" id="writers" name="writers"><br>
+                        <input type="text" id="title" name="title" th:value="${title}"><br><br>
+                        <label for="theme">Themes :</label><br>
+                        <input type="text" id="theme" style="margin-bottom: 1.2rem;">
+                        <button type="button" class="btn btn-primary"
+                                onclick = "addTheme()" style="margin-bottom: .1rem;">Add theme</button><br>
+                        <div class="themes" th:each="theme : ${themes}">
+                            <div class="badge badge__user-exist">
+                            <input type="hidden" name="theme" th:value="${theme}">
+                            <div class="conf__user-container">
+                                <span class="conf__user" th:text="${theme}"></span>
+                                <button type="button" class="close" aria-label="Close"
+                                        onclick = "removeElement(this)">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                        </div><br>
+                        <div class="themes"></div><br>
+                        <label for="username">authors :</label><br>
+                        <input type="text" id="username" style="margin-bottom: 1.2rem;">
+                        <button type="button" class="btn btn-primary"
+                                onclick = "addUser()" style="margin-bottom: .1rem;">Add user</button><br>
+                        <div class="commitee">
+                            <th:block th:each = "user : ${foundUsers}">
+                                <div class="badge badge__user-exist">
+                                    <input type="hidden" id="user" name="user" th:value="${user}">
+                                    <div class="conf__user-container">
+                                        <span class="conf__user" th:text="${user}"></span>
+                                        <button type="button" class="close" aria-label="Close"
+                                                onclick = "removeElement(this)">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block th:each = "user : ${notFoundUsers}">
+                                <div class="badge badge__user-notfound">
+                                    <input type="hidden" name="user" th:value="${user}">
+                                    <div class="conf__user-container">
+                                        <span class="conf__user" th:text="${user}"></span>
+                                        <button type="button" class="close" aria-label="Close"
+                                                onclick = "removeElement(this)">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th:block>
+                        </div>
+                        <div class="commitee"></div><br>
                         <label for="description">description:</label><br>
-                        <textarea name="description" id="description" cols="50" rows="10"></textarea><br>
+                        <textarea name="description" id="description" cols="50" rows="10" th:value="${description}"></textarea><br>
                         <label for="upload">article (pdf)</label>
                         <input type="file" name="upload" accept="application/pdf" /><br>
                         <button type="submit" class="btn btn-primary">create</button>
