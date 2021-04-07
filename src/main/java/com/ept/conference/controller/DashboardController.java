@@ -38,5 +38,18 @@ public class DashboardController {
 
         return "index";
     }
+    @GetMapping("/myConferences")
+    public String getMyConfs(Principal principal, Model model){
+
+        String email = principal.getName();
+
+        User user = userRepository.findByEmail(email);
+
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("myConfs", conferenceRepository.findConferenceByAdmin(email));
+        model.addAttribute("supervisedConfs", conferenceRepository.findConferenceByReviewer(email));
+
+        return "myConferences";
+    }
 
 }

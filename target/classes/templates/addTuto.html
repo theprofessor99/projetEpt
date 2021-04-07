@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -79,11 +79,15 @@
                 <main class="hotel-view">
                   <div class="wrapper__create" style="margin-left: 5rem;">
                     <h1>Add/Edit Tutorial</h1>
-                    <form class="wrapper__form" action="/success.html" mathod="GET">
+                      <div class="alert alert-success" th:if="param.success">
+                          Tutorial added
+                      </div>
+                      <div class="alert alert-failure" th:if="param.failure">
+                          Tutorial couldn't be added
+                      </div>
+                    <form class="wrapper__form" th:action="@{/addTuto/{id}(id = ${id})}" method="POST">
                         <label for="title">Title:</label><br>
                         <input type="text" id="title" name="title"><br>
-                        <label for="writers">Tutor</label><br>
-                        <input type="writers" id="writers" name="writers"><br>
                         <label for="description">description:</label><br>
                         <textarea name="description" id="description" cols="50" rows="10"></textarea><br><br>
                         <button type="submit" class="btn btn-primary">create</button>

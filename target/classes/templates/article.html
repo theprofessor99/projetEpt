@@ -80,15 +80,15 @@
                   <div class="infos">
                     <h1>Informations</h1>
                     <h3 class="attribute">Title :</h3>
-                    <p th:text="${article.title}"></p>
+                    <p th:text="${article.title}" style="margin-left: 3rem"></p>
                     <h3 class="attribute">themes :</h3>
                       <p style="margin-left: 3rem">
                       <th:block th:each = "theme : ${article.themes}">
-                          <span th:text="theme"></span> &nbsp;
+                          <span th:text="${theme.getName()}"></span> &nbsp;
                       </th:block>
                       </p>
                     <h3 class="attribute">description :</h3>
-                    <p th:text="${article.description}"></p>
+                    <p th:text="${article.description}" style="margin-left: 3rem"></p>
                     <h3 class="attribute">rating: <span class="rating" th:text="${article.rating} + ' / 3'"></span></h3>
                     <div th:if="${!view}">
                       <form th:action="@{/rateArticle/{id}(id = ${article.id})}" th:method="POST">

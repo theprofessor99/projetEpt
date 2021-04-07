@@ -144,12 +144,16 @@ public class ConferenceBootstrap implements CommandLineRunner {
 
         conference1.getTutorials().add(tutorial1);
         tutorial1.setConference(conference1);
+        tutorial1.setTutor(oussama);
         conference1.getTutorials().add(tutorial2);
         tutorial2.setConference(conference1);
+        tutorial2.setTutor(oussama);
         conference1.getTutorials().add(tutorial3);
         tutorial3.setConference(conference1);
+        tutorial3.setTutor(oussama);
         conference1.getTutorials().add(tutorial4);
         tutorial4.setConference(conference1);
+        tutorial4.setTutor(oussama);
 
         tutorialRepository.save(tutorial1);
         tutorialRepository.save(tutorial2);

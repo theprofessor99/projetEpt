@@ -87,6 +87,16 @@
                       <h3 class="conf__info">Description: </h3>
                       <p class="desc__text" th:text="${conference.description}"></p>
 
+                        <div  th:if="${admin}">
+                        <h3 class="conf__info">Reviewers:</h3>
+                        <th:block th:each="user : ${commite}" style="display: inline-block;">
+                            <div class="btn btn-primary rev-tag">
+                                <span th:text="${user.getUsername()}"></span><span class="badge badge-light" th:text="${user.getToReviewArticles().size()}"></span>
+                                <span class="sr-only">unread messages</span>
+                            </div>
+                        </th:block>
+                            </div>
+
                       <form action="/payment.html" method="GET" style="margin-left: 2rem;" th:if="${!admin and !sub}">
                         <button type="submit" class="btn btn-primary">subscribe</button>
                       </form>
@@ -103,7 +113,7 @@
                               add article
                           </button>
                       </form>
-                      <form action="addTuto.html" method="GET" style="margin-left: 2rem;margin-top: 1rem;" th:if="${user.speciality != null}">
+                      <form th:action="@{/addTuto/{id}(id = ${conference.getId()})}" method="GET" style="margin-left: 2rem;margin-top: 1rem;" th:if="${user.speciality != null}">
                         <button class="btn btn-success">
                             create tutorial
                         </button>
@@ -161,9 +171,11 @@
                                       <div class="timeline-panel credits">
                                           <ul class="timeline-panel-ul">
                                               <li><span class="importo">Tutorial :</span></li>
-                                              <li><span id="tuto">tutor :</span><span th:text="${day.getTutorial().getTutor()}"></span></li>
+                                              <li><span id="tuto">tutor :</span><span th:text="${day.getTutorial().getTutor().getUsername()}"></span></li>
                                               <li><span id="tuto">Title: </span><span th:text="${day.getTutorial().getTitle()}"></span> </li>
                                               <li><span id="tuto">description :</span><span th:text="${day.getTutorial().getDesc()}"></span> </li>
+                                              <div th:text="${day.getTutorial().getStatus()}" class="badge badge-primary" th:if="${day.getTutorial().getStatus() != 'pending'}"></div>
+                                              <div th:text="${day.getTutorial().getStatus()}" class="badge badge-secondary" th:if="${day.getTutorial().getStatus() == 'pending'}"></div>
                                               <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
                                               <form action="/payment.html" method="GET">
                                                   <button class="btn btn-primary" th:if="${!admin}">

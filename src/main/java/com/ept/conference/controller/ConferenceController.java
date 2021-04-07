@@ -64,6 +64,7 @@ public class ConferenceController {
         model.addAttribute("user", user);
         model.addAttribute("days", days);
         model.addAttribute("formatter", formatter);
+        model.addAttribute("commite", conference.getReviewers());
 
         return "conference";
     }
