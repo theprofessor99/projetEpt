@@ -11,74 +11,82 @@
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
         <link rel="stylesheet" href="/css/style.css">
-        <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
-        
-        <title>trillo &mdash; Your all-in-one booking app</title>
+        <link rel="shortcut icon" type="/image/png" href="/img/favicon.png">
+
+        <title>Confos &mdash; Conference management System</title>
     </head>
     <body>
-        <div class="main_container">
-            <header class="header">
-                <img src="/img/logo.png" alt="trillo logo" class="logo">
+    <div class="main_container">
+        <header class="header">
+            <img src="/img/logo.png" alt="conf logo" class="logo">
 
-                <form action="#" class="search">
-                    <input type="text" class="search__input" placeholder="Search hotels">
-                    <button class="search__button">
-                        <svg class="search__icon">
-                            <use xlink:href="/img/sprite.svg#icon-magnifying-glass"></use>
-                        </svg>
-                    </button>
-                </form>
+            <form action="/search" class="search" method="get">
+                <input type="text" class="search__input" placeholder="Search conferences" name="name">
+                <button class="search__button">
+                    <svg class="search__icon">
+                        <use xlink:href="/img/sprite.svg#icon-magnifying-glass"></use>
+                    </svg>
+                </button>
+            </form>
 
-                <nav class="user-nav">
-                    <div class="user-nav__icon-box">
-                        <svg class="user-nav__icon">
-                            <use xlink:href="/img/sprite.svg#icon-bookmark"></use>
-                        </svg>
-                        <span class="user-nav__notification">7</span>
-                    </div>
-                    <div class="user-nav__icon-box">
-                        <svg class="user-nav__icon">
-                            <use xlink:href="/img/sprite.svg#icon-chat"></use>
-                        </svg>
-                        <span class="user-nav__notification">13</span>
-                    </div>
-                    <div class="user-nav__user">
-                        <img src="/img/user.jpg" alt="User photo" class="user-nav__user-photo">
-                        <span class="user-nav__user-name">oussama</span>
-                    </div>
-                </nav>
-            </header>
+            <nav class="user-nav">
+                <div class="user-nav__icon-box">
+                    <svg class="user-nav__icon">
+                        <use xlink:href="/img/sprite.svg#icon-bookmark"></use>
+                    </svg>
+                    <span class="user-nav__notification">7</span>
+                </div>
+
+                <div class="user-nav__user">
+                    <img src="/img/user.jpg" alt="User photo" class="user-nav__user-photo">
+                    <span class="user-nav__user-name" th:text="${username}"></span>
+                </div>
+            </nav>
+        </header>
 
 
-            <div class="content">
-                <nav class="sidebar">
-                    <ul class="side-nav">
-                        <li class="side-nav__item">
-                            <a href="/index.html" class="side-nav__link">
-                                <span>Confernces</span>
-                            </a>
-                        </li>
-                        <li class="side-nav__item">
-                            <a href="/articleList.html" class="side-nav__link">
-                                <span>Articles</span>
-                            </a>
-                        </li>
-                        <li class="side-nav__item">
-                            <a href="/login.html" class="side-nav__link">
-                                <span>Log out</span>
-                            </a>
-                        </li>
-                    </ul>
+        <div class="content">
+            <nav class="sidebar">
+                <ul class="side-nav">
+                    <li class="side-nav__item">
+                        <a href="/" class="side-nav__link">
+                            <span>Browse Confernces</span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item side-nav__item--active">
+                        <a href="/myConferences" class="side-nav__link">
+                            <span>My Confernces</span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a href="/articleList" class="side-nav__link">
+                            <span>Articles</span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a href="/logout" class="side-nav__link">
+                            <span>Log out</span>
+                        </a>
+                    </li>
+                </ul>
 
-                    <div class="legal">
-                        &copy; 2021 by Ept. All rights reserved.
-                    </div>
-                </nav>
+                <div class="legal">
+                    &copy; 2021 by Ept. All rights reserved.
+                </div>
+            </nav>
 
 
 
                 <main class="hotel-view">
                     <div class="wrapper">
+                        <div class="alert alert-success" th:if="${param.subSuccess}">
+                            Payment successful! you are now subscribed
+                        </div>
+                        <div class="alert alert-success" th:if="${param.tutoSuccess}">
+                            Payment successful! you can now attend the Tutorial.
+                            In case of annulation you will be refunded
+                        </div>
+
                       <h1>Informations</h1>
                       <h3 class="conf__info">Title:</h3>
                       <p class="desc__text" th:text="${conference.title}"></p>
@@ -92,12 +100,12 @@
                         <th:block th:each="user : ${commite}" style="display: inline-block;">
                             <div class="btn btn-primary rev-tag">
                                 <span th:text="${user.getUsername()}"></span><span class="badge badge-light" th:text="${user.getToReviewArticles().size()}"></span>
-                                <span class="sr-only">unread messages</span>
+                                <span class="sr-only"></span>
                             </div>
                         </th:block>
                             </div>
 
-                      <form action="/payment.html" method="GET" style="margin-left: 2rem;" th:if="${!admin and !sub}">
+                      <form th:action="@{/payment/subscribe/{id}(id = ${conference.getId()})}" method="GET" style="margin-left: 2rem;" th:if="${!admin and !sub}">
                         <button type="submit" class="btn btn-primary">subscribe</button>
                       </form>
                         <form action="/payment.html" method="GET" style="margin-left: 2rem;" th:if="${sub}">
@@ -113,7 +121,7 @@
                               add article
                           </button>
                       </form>
-                      <form th:action="@{/addTuto/{id}(id = ${conference.getId()})}" method="GET" style="margin-left: 2rem;margin-top: 1rem;" th:if="${user.speciality != null}">
+                      <form th:action="@{/addTuto/{id}(id = ${conference.getId()})}" method="GET" style="margin-left: 2rem;margin-top: 1rem;" th:if="${user.speciality != null && conference.getParticipants().contains(user)}">
                         <button class="btn btn-success">
                             create tutorial
                         </button>
@@ -174,11 +182,15 @@
                                               <li><span id="tuto">tutor :</span><span th:text="${day.getTutorial().getTutor().getUsername()}"></span></li>
                                               <li><span id="tuto">Title: </span><span th:text="${day.getTutorial().getTitle()}"></span> </li>
                                               <li><span id="tuto">description :</span><span th:text="${day.getTutorial().getDesc()}"></span> </li>
-                                              <div th:text="${day.getTutorial().getStatus()}" class="badge badge-primary" th:if="${day.getTutorial().getStatus() != 'pending'}"></div>
-                                              <div th:text="${day.getTutorial().getStatus()}" class="badge badge-secondary" th:if="${day.getTutorial().getStatus() == 'pending'}"></div>
+                                              <div th:text="${day.getTutorial().getStatus()}" class="badge badge-secondary" style="background-color: #777777" th:if="${day.getTutorial().getStatus() == 'pending'}"></div>
+                                              <div th:text="${day.getTutorial().getStatus()}" class="badge badge-danger" style="background-color: #e2001a" th:if="${day.getTutorial().getStatus() == 'caneled'}"></div>
+                                              <div th:text="${day.getTutorial().getStatus()}" class="badge badge-success" style="background-color: #1CB94E" th:if="${day.getTutorial().getStatus() == 'active'}"></div>
+                                              <div class="badge badge-info" style="background-color: #4997cd" th:if="${day.getTutorial().getParticipants().contains(user)}">
+                                                  attending
+                                              </div>
                                               <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
-                                              <form action="/payment.html" method="GET">
-                                                  <button class="btn btn-primary" th:if="${!admin}">
+                                              <form th:action="@{/payment/attend/{id}(id = ${day.getTutorial().getId()})}" method="GET">
+                                                  <button class="btn btn-primary" th:if="${!admin && !day.getTutorial().getParticipants().contains(user)}">
                                                       attend
                                                   </button>
                                               </form>

@@ -10,23 +10,23 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
 
-        <script src="js/conference.js"></script>
-        
-        <title>trillo &mdash; Your all-in-one booking app</title>
+        <script src="/js/conference.js"></script>
+
+        <title>Confos &mdash; Conference management System</title>
     </head>
     <body>
         <div class="main_container">
             <header class="header">
-                <img src="img/logo.png" alt="conf logo" class="logo">
+                <img src="/img/logo.png" alt="conf logo" class="logo">
 
-                <form action="#" class="search">
-                    <input type="text" class="search__input" placeholder="Search conferences">
+                <form action="/search" class="search" method="get">
+                    <input type="text" class="search__input" placeholder="Search conferences" name="name">
                     <button class="search__button">
                         <svg class="search__icon">
-                            <use xlink:href="img/sprite.svg#icon-magnifying-glass"></use>
+                            <use xlink:href="/img/sprite.svg#icon-magnifying-glass"></use>
                         </svg>
                     </button>
                 </form>
@@ -34,13 +34,13 @@
                 <nav class="user-nav">
                     <div class="user-nav__icon-box">
                         <svg class="user-nav__icon">
-                            <use xlink:href="img/sprite.svg#icon-bookmark"></use>
+                            <use xlink:href="/img/sprite.svg#icon-bookmark"></use>
                         </svg>
                         <span class="user-nav__notification">7</span>
                     </div>
 
                     <div class="user-nav__user">
-                        <img src="img/user.jpg" alt="User photo" class="user-nav__user-photo">
+                        <img src="/img/user.jpg" alt="User photo" class="user-nav__user-photo">
                         <span class="user-nav__user-name" th:text="${username}"></span>
                     </div>
                 </nav>
@@ -50,12 +50,12 @@
             <div class="content">
                 <nav class="sidebar">
                     <ul class="side-nav">
-                        <li class="side-nav__item">
+                        <li class="side-nav__item side-nav__item--active">
                             <a href="/" class="side-nav__link">
                                 <span>Browse Confernces</span>
                             </a>
                         </li>
-                        <li class="side-nav__item side-nav__item--active">
+                        <li class="side-nav__item">
                             <a href="/myConferences" class="side-nav__link">
                                 <span>My Confernces</span>
                             </a>

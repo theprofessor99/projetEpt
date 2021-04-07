@@ -3,6 +3,7 @@ package com.ept.conference.controller;
 import com.ept.conference.controller.dto.UserRegistrationDto;
 import com.ept.conference.service.UserServiceImp;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +20,11 @@ public class RegisterController {
     }
 
     @PostMapping
-    public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto) {
+    public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto, Model model) {
         userService.save(registrationDto);
-        //return "error";
-        return "redirect:/login?success";
+        //return "redirect:/login?success";
+        model.addAttribute("success", true);
+        return "login";
     }
 
 }

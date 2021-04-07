@@ -20,4 +20,5 @@ public interface ConferenceRepository extends CrudRepository<Conference, Long> {
     @Query("SELECT c FROM Conference c JOIN c.reviewers r WHERE r.email = ?1")
     Collection<Conference> findConferenceByReviewer(String reviewer);
 
+    Collection<Conference> findConferenceByTitle(String title);
 }

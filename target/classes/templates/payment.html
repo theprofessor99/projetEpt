@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,79 +7,120 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>  
 
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
 
         <script src="payment.js"></script>
-        
-        <title>trillo &mdash; Your all-in-one booking app</title>
+        <title>Proceed with payment</title>
     </head>
     <body>
-        <div class="main_container">
-            <header class="header">
-                <img src="img/logo.png" alt="trillo logo" class="logo">
+    <div class="main_container">
+        <header class="header">
+            <img src="/img/logo.png" alt="conf logo" class="logo">
 
-                <form action="#" class="search">
-                    <input type="text" class="search__input" placeholder="Search hotels">
-                    <button class="search__button">
-                        <svg class="search__icon">
-                            <use xlink:href="img/sprite.svg#icon-magnifying-glass"></use>
-                        </svg>
-                    </button>
-                </form>
+            <form action="/search" class="search" method="get">
+                <input type="text" class="search__input" placeholder="Search conferences" name="name">
+                <button class="search__button">
+                    <svg class="search__icon">
+                        <use xlink:href="/img/sprite.svg#icon-magnifying-glass"></use>
+                    </svg>
+                </button>
+            </form>
 
-                <nav class="user-nav">
-                    <div class="user-nav__icon-box">
-                        <svg class="user-nav__icon">
-                            <use xlink:href="img/sprite.svg#icon-bookmark"></use>
-                        </svg>
-                        <span class="user-nav__notification">7</span>
-                    </div>
-                    <div class="user-nav__icon-box">
-                        <svg class="user-nav__icon">
-                            <use xlink:href="img/sprite.svg#icon-chat"></use>
-                        </svg>
-                        <span class="user-nav__notification">13</span>
-                    </div>
-                    <div class="user-nav__user">
-                        <img src="img/user.jpg" alt="User photo" class="user-nav__user-photo">
-                        <span class="user-nav__user-name">Jonas</span>
-                    </div>
-                </nav>
-            </header>
+            <nav class="user-nav">
+                <div class="user-nav__icon-box">
+                    <svg class="user-nav__icon">
+                        <use xlink:href="/img/sprite.svg#icon-bookmark"></use>
+                    </svg>
+                    <span class="user-nav__notification">7</span>
+                </div>
+
+                <div class="user-nav__user">
+                    <img src="/img/user.jpg" alt="User photo" class="user-nav__user-photo">
+                    <span class="user-nav__user-name" th:text="${username}"></span>
+                </div>
+            </nav>
+        </header>
 
 
-            <div class="content">
-                <nav class="sidebar">
-                    <ul class="side-nav">
-                        <li class="side-nav__item">
-                            <a href="/index.html" class="side-nav__link">
-                                <span>Confernces</span>
-                            </a>
-                        </li>
-                        <li class="side-nav__item">
-                          <a href="/articleList.html" class="side-nav__link">
-                              <span>Articles</span>
-                          </a>
-                      </li>
-                        <li class="side-nav__item">
-                            <a href="/login.html" class="side-nav__link">
-                                <span>Log out</span>
-                            </a>
-                        </li>
-                    </ul>
+        <div class="content">
+            <nav class="sidebar">
+                <ul class="side-nav">
+                    <li class="side-nav__item">
+                        <a href="/" class="side-nav__link">
+                            <span>Browse Confernces</span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a href="/myConferences" class="side-nav__link">
+                            <span>My Confernces</span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a href="/articleList" class="side-nav__link">
+                            <span>Articles</span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a href="/logout" class="side-nav__link">
+                            <span>Log out</span>
+                        </a>
+                    </li>
+                </ul>
 
-                    <div class="legal">
-                        &copy; 2021 by Ept. All rights reserved.
-                    </div>
-                </nav>
+                <div class="legal">
+                    &copy; 2021 by Ept. All rights reserved.
+                </div>
+            </nav>
 
 
 
                 <main class="hotel-view">
                     <div class="container">
                         <div class='row'>
-                            <div class='col-md-4'></div>
+                            <div class='wrapper'>
+                            <h1>Payment :</h1>
+                            <div class="card" style="margin-bottom: 2rem; margin-top: 3rem;font-size: 1.4rem" th:if="${pay == 'sub'}">
+                                <div class="card-body">
+                                    to proceed with your subscription you need to pay an amount of <span th:text="${amount} + '$'"></span>. you can use your visa or master card.<br> Click pay to continue
+                                </div>
+                            </div>
+                                <div class="card" style="margin-bottom: 2rem; margin-top: 3rem;font-size: 1.4rem" th:if="${pay == 'tuto'}">
+                                    <div class="card-body">
+                                        to attend Tutorial you need to pay an amount of <span th:text="${amount} + '$'"></span>. you can use your visa or master card.<br> Click pay to continue
+                                    </div>
+                                </div>
+                            <form th:action="@{/charge/sub/{id}(id = ${id})}" method='POST' id='checkout-form' th:if="${pay == 'sub'}">
+                                <input type='hidden' th:value="${amount}" name='amount' />
+                                <script
+                                        src='https://checkout.stripe.com/checkout.js'
+                                        class='stripe-button'
+                                        th:attr='data-key=${stripePublicKey},
+                                        data-amount=${amount * 100}'
+                                        data-name='Conference'
+                                        data-description='Product Checkout'
+                                        data-image
+                                                ='/img/logo.png'
+                                        data-locale='auto'
+                                        data-zip-code='false'>
+                                </script>
+                            </form>
+                                <form th:action="@{/charge/attend/{id}(id = ${id})}" method='POST' id='checkout-form' th:if="${pay == 'tuto'}">
+                                    <input type='hidden' th:value="${amount}" name='amount' />
+                                    <script
+                                            src='https://checkout.stripe.com/checkout.js'
+                                            class='stripe-button'
+                                            th:attr='data-key=${stripePublicKey},
+                                        data-amount=${amount * 100}'
+                                            data-name='Conference'
+                                            data-description='Product Checkout'
+                                            data-image
+                                                    ="localhost:8080/target/classes/static/img/logo.png"
+                                            data-locale='auto'
+                                            data-zip-code='false'>
+                                    </script>
+                                </form>
+                            <!--<div class='col-md-4'></div>
                             <div class='col-md-4'>
                               <script src='https://js.stripe.com/v2/' type='text/javascript'></script>
                               <form accept-charset="UTF-8" action="/success.html" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj" id="payment-form" method="GET"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" /><input name="_method" type="hidden" value="PUT" /><input name="authenticity_token" type="hidden" value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8=" /></div>
@@ -130,8 +171,8 @@
                                   </div>
                                 </div>
                               </form>
-                            </div>
-                            <div class='col-md-4'></div>
+                            </div>-->
+                                </div>
                         </div>
                     </div>
                 </main>

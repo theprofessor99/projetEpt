@@ -29,7 +29,7 @@ public class CreateArticleService {
         this.themeRepository = themeRepository;
     }
 
-    public ArrayList<String>[] createArticle(String title, String description, String[] authors, String[] themes, Conference conference){
+    public ArrayList<String>[] createArticle(String title, String description, String[] authors, String[] themes, Conference conference, String fileName){
         ArrayList<User> users = new ArrayList<>();
         ArrayList<String> notFounduUsers = new ArrayList<>();
         ArrayList<String> foundUsers = new ArrayList<>();
@@ -49,6 +49,7 @@ public class CreateArticleService {
         }else {
 
             Article article = new Article(title, description);
+            article.setFile(fileName);
             articleRepository.save(article);
 
             Set<Theme> articleThemes = new HashSet<>();

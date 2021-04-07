@@ -17,6 +17,7 @@ public class Article {
     private String title;
     private String description;
     private float rating;
+    private String file;
 
     @ManyToMany(mappedBy = "articles")
     private Set<Theme> themes = new HashSet<Theme>();
@@ -128,6 +129,14 @@ public class Article {
 
     public void setConference(Conference conference) {
         this.conference = conference;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
     }
 
     @Override

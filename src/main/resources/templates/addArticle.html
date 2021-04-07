@@ -14,67 +14,67 @@
 
         <script src = "/js/conference.js"></script>
         
-        <title>trillo &mdash; Your all-in-one booking app</title>
+        <title>Add article</title>
     </head>
     <body>
-        <div class="main_container">
-            <header class="header">
-                <img src="/img/logo.png" alt="trillo logo" class="logo">
+    <div class="main_container">
+        <header class="header">
+            <img src="/img/logo.png" alt="conf logo" class="logo">
 
-                <form action="#" class="search">
-                    <input type="text" class="search__input" placeholder="Search hotels">
-                    <button class="search__button">
-                        <svg class="search__icon">
-                            <use xlink:href="/img/sprite.svg#icon-magnifying-glass"></use>
-                        </svg>
-                    </button>
-                </form>
+            <form action="/search" class="search" method="get">
+                <input type="text" class="search__input" placeholder="Search conferences" name="name">
+                <button class="search__button">
+                    <svg class="search__icon">
+                        <use xlink:href="/img/sprite.svg#icon-magnifying-glass"></use>
+                    </svg>
+                </button>
+            </form>
 
-                <nav class="user-nav">
-                    <div class="user-nav__icon-box">
-                        <svg class="user-nav__icon">
-                            <use xlink:href="/img/sprite.svg#icon-bookmark"></use>
-                        </svg>
-                        <span class="user-nav__notification">7</span>
-                    </div>
-                    <div class="user-nav__icon-box">
-                        <svg class="user-nav__icon">
-                            <use xlink:href="/img/sprite.svg#icon-chat"></use>
-                        </svg>
-                        <span class="user-nav__notification">13</span>
-                    </div>
-                    <div class="user-nav__user">
-                        <img src="/img/user.jpg" alt="User photo" class="user-nav__user-photo">
-                        <span class="user-nav__user-name">oussama</span>
-                    </div>
-                </nav>
-            </header>
+            <nav class="user-nav">
+                <div class="user-nav__icon-box">
+                    <svg class="user-nav__icon">
+                        <use xlink:href="/img/sprite.svg#icon-bookmark"></use>
+                    </svg>
+                    <span class="user-nav__notification">7</span>
+                </div>
+
+                <div class="user-nav__user">
+                    <img src="/img/user.jpg" alt="User photo" class="user-nav__user-photo">
+                    <span class="user-nav__user-name" th:text="${username}"></span>
+                </div>
+            </nav>
+        </header>
 
 
-            <div class="content">
-                <nav class="sidebar">
-                    <ul class="side-nav">
-                        <li class="side-nav__item">
-                            <a href="/index.html" class="side-nav__link">
-                                <span>Confernces</span>
-                            </a>
-                        </li>
-                        <li class="side-nav__item">
-                            <a href="/articleList.html" class="side-nav__link">
-                                <span>Articles</span>
-                            </a>
-                        </li>
-                        <li class="side-nav__item">
-                          <a href="/login.html" class="side-nav__link">
-                              <span>Log out</span>
-                          </a>
-                      </li>
-                    </ul>
+        <div class="content">
+            <nav class="sidebar">
+                <ul class="side-nav">
+                    <li class="side-nav__item">
+                        <a href="/" class="side-nav__link">
+                            <span>Browse Confernces</span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a href="/myConferences" class="side-nav__link">
+                            <span>My Confernces</span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a href="/articleList" class="side-nav__link">
+                            <span>Articles</span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a href="/logout" class="side-nav__link">
+                            <span>Log out</span>
+                        </a>
+                    </li>
+                </ul>
 
-                    <div class="legal">
-                        &copy; 2021 by Ept. All rights reserved.
-                    </div>
-                </nav>
+                <div class="legal">
+                    &copy; 2021 by Ept. All rights reserved.
+                </div>
+            </nav>
 
 
 
@@ -84,7 +84,7 @@
                       <div class="alert alert-danger" th:if="${fail}">
                           One or more users not found
                       </div>
-                    <form class="wrapper__form" th:action="@{/createArticle/{id}(id = ${id})}" th:method="Post">
+                    <form class="wrapper__form" th:action="@{/createArticle/{id}(id = ${id})}" th:method="Post" enctype="multipart/form-data">
                         <label for="title">Title:</label><br>
                         <input type="text" id="title" name="title" th:value="${title}"><br><br>
                         <label for="theme">Themes :</label><br>
@@ -137,8 +137,8 @@
                         <div class="commitee"></div><br>
                         <label for="description">description:</label><br>
                         <textarea name="description" id="description" cols="50" rows="10" th:value="${description}"></textarea><br>
-                        <label for="upload">article (pdf)</label>
-                        <input type="file" name="upload" accept="application/pdf" /><br>
+                        <label for="file">article (pdf)</label>
+                        <input type="file" name="file" id="file" accept="application/pdf"/><br>
                         <button type="submit" class="btn btn-primary">create</button>
                     </form>
                 </div>
