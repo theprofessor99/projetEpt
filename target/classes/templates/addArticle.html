@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         </div><br>
-                        <div class="themes"></div><br>
+                        <div class="themes"></div>
                         <label for="username">authors :</label><br>
                         <input type="text" id="username" style="margin-bottom: 1.2rem;">
                         <button type="button" class="btn btn-primary"
@@ -133,6 +133,37 @@
                             </th:block>
                         </div>
                         <div class="commitee"></div><br>
+                        <label for="username">Presenters :</label><br>
+                        <input type="text" id="presname" style="margin-bottom: 1.2rem;">
+                        <button type="button" class="btn btn-primary"
+                                onclick = "addPresenter()" style="margin-bottom: .1rem;">Add user</button><br>
+                        <div class="presenters">
+                            <th:block th:each = "user : ${foundPresenters}">
+                                <div class="badge badge__user-exist">
+                                    <input type="hidden" id="pres" name="pres" th:value="${user}">
+                                    <div class="conf__user-container">
+                                        <span class="conf__user" th:text="${user}"></span>
+                                        <button type="button" class="close" aria-label="Close"
+                                                onclick = "removeElement(this)">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block th:each = "user : ${notFoundPresenters}">
+                                <div class="badge badge__user-notfound">
+                                    <input type="hidden" name="pres" th:value="${user}">
+                                    <div class="conf__user-container">
+                                        <span class="conf__user" th:text="${user}"></span>
+                                        <button type="button" class="close" aria-label="Close"
+                                                onclick = "removeElement(this)">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th:block>
+                        </div>
+                        <div class="presenters"></div><br>
                         <label for="description">description:</label><br>
                         <textarea name="description" id="description" cols="50" rows="10" th:value="${description}"></textarea><br>
                         <label for="file">article (pdf)</label>

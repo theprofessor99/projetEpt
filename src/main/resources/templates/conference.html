@@ -108,7 +108,7 @@
                       <form th:action="@{/payment/subscribe/{id}(id = ${conference.getId()})}" method="GET" style="margin-left: 2rem;" th:if="${!admin and !sub}">
                         <button type="submit" class="btn btn-primary">subscribe</button>
                       </form>
-                        <form action="/payment.html" method="GET" style="margin-left: 2rem;" th:if="${sub}">
+                        <form action="#" method="GET" style="margin-left: 2rem;" th:if="${sub}">
                             <button type="submit" disabled class="btn btn-primary">subscribed</button>
                         </form>
 
@@ -121,7 +121,7 @@
                               add article
                           </button>
                       </form>
-                      <form th:action="@{/addTuto/{id}(id = ${conference.getId()})}" method="GET" style="margin-left: 2rem;margin-top: 1rem;" th:if="${user.speciality != null && conference.getParticipants().contains(user)}">
+                      <form th:action="@{/addTuto/{id}(id = ${conference.getId()})}" method="GET" style="margin-left: 2rem;margin-top: 1rem;" th:if="${user.speciality != null && (conference.getParticipants().contains(user) or admin)}">
                         <button class="btn btn-success">
                             create tutorial
                         </button>
@@ -143,7 +143,7 @@
 
                           <div class="row timeline-movement">
                           <div class="timeline-badge">
-                              <span class="timeline-balloon-date-day" th:text="${day.getDate().getDayOfMonth()}"></span>
+                              <span class="timeline-balloon-date-day" th:text="${day.getDate().getDayOfMonth()}"></span><br>
                               <span class="timeline-balloon-date-month" th:text="${day.getDate().format(formatter)}"></span>
                           </div>
 
