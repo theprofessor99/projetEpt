@@ -81,9 +81,7 @@
                 <main class="hotel-view">
                   <div class="wrapper__create" style="margin-left: 5rem;">
                     <h1>Add/Edit Article</h1>
-                      <div class="alert alert-danger" th:if="${fail}">
-                          One or more users not found
-                      </div>
+                      <div class="alert alert-danger" th:if="${fail}" th:text="${error}"></div>
                     <form class="wrapper__form" th:action="@{/createArticle/{id}(id = ${id})}" th:method="Post" enctype="multipart/form-data">
                         <label for="title">Title:</label><br>
                         <input type="text" id="title" name="title" th:value="${title}"><br><br>

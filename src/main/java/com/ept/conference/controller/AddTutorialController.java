@@ -42,6 +42,7 @@ public class AddTutorialController {
                           Principal principal){
 
         User user = userRepository.findByEmail(principal.getName());
+        model.addAttribute("username", user.getUsername());
         Conference conference = conferenceRepository.findById(id).get();
 
         model.addAttribute("id", id);

@@ -26,8 +26,10 @@ public class RateController {
     }
 
     @GetMapping
-    public String ratePage(@PathVariable("id") Long id, Model model){
+    public String ratePage(@PathVariable("id") Long id, Model model, Principal principal){
 
+        User user = userRepository.findByEmail(principal.getName());
+        model.addAttribute("username", user.getUsername());
         model.addAttribute("article", articleRepository.findById(id).get());
         model.addAttribute("view", false);
         return "article";

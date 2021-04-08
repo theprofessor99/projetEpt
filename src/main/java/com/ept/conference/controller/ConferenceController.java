@@ -32,6 +32,7 @@ public class ConferenceController {
     public String getConference(@PathVariable("id") Long id, Model model, Principal principal){
 
         User user = userRepository.findByEmail(principal.getName());
+        model.addAttribute("username", user.getUsername());
         Conference conference = conferenceRepository.findById(id).get();
 
         if(user.getConferences().contains(conference)){

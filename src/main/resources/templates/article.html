@@ -99,7 +99,7 @@
                   </div>
                   <div style="margin-left: 5rem;margin-bottom: 3rem">
                     <h1>preview</h1>
-                    <a href="/Partie1.pdf">preview the article (pdf)</a>
+                    <a th:href="@{/preview/{id}(id = ${article.getId()})}">preview the article (pdf)</a>
                   </div>
                 </main>
             </div>

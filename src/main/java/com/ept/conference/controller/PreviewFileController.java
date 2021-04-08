@@ -25,8 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PreviewFileController {
 
-    private static final String DIRECTORY = "C:/PDF";
-    private static final String DEFAULT_FILE_NAME = "test.pdf";
     private final ArticleRepository articleRepository;
 
     @Value("${app.upload.dir:${user.home}}")
@@ -39,8 +37,6 @@ public class PreviewFileController {
         this.articleRepository = articleRepository;
     }
 
-    // http://localhost:8080/download1?fileName=abc.zip
-    // Using ResponseEntity<InputStreamResource>
     @RequestMapping("/preview/{id}")
     public ResponseEntity<InputStreamResource> downloadFile1(
             @PathVariable("id") Long articleId) throws IOException {
@@ -52,18 +48,13 @@ public class PreviewFileController {
                 .get(uploadDir + File.separator + StringUtils.cleanPath(fileName));
 
         MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
-        System.out.println("fileName: " + fileName);
-        System.out.println("mediaType: " + mediaType);
 
         File file = new File(String.valueOf(copyLocation));
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
         return ResponseEntity.ok()
-                // Content-Disposition
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
-                // Content-Type
                 .contentType(mediaType)
-                // Contet-Length
                 .contentLength(file.length()) //
                 .body(resource);
     }

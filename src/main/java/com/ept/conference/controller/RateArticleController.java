@@ -28,8 +28,8 @@ public class RateArticleController {
     @PostMapping
     public String rateArticle(@PathVariable("id") Long id,@RequestParam("rating") float rating, Model model, Principal principal) {
         Article article = articleRepository.findById(id).get();
-        String email = principal.getName();
-        User user = userRepository.findByEmail(email);
+        User user = userRepository.findByEmail(principal.getName());
+        model.addAttribute("username", user.getUsername());
 
         rateArticleService.rateArticle(article, user, rating);
 

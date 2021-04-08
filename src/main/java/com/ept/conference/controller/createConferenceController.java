@@ -6,6 +6,8 @@ import com.ept.conference.repositories.UserRepository;
 import com.ept.conference.service.ConfernceRegistrationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +18,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/createConf")
@@ -31,15 +34,43 @@ public class createConferenceController {
     //Todo modify create conference js file to eliminate the possibility of two duplicate usernames
     //Todo solve the problem of not sending any usernames
 
+    /*@ExceptionHandler(MissingServletRequestParameterException.class)
+    public String handleMissingParams(MissingServletRequestParameterException ex,
+                                      @RequestParam("title") String title,
+                                      @RequestParam("date") String date,
+                                      @RequestParam("description") String description,
+                                      Model model,
+                                      Principal principal) {
+
+
+        String name = ex.getParameterName();
+        System.out.println(name + " parameter is missing");
+        String username = principal.getName();
+        model.addAttribute("username", username);
+        addAttributes(title, date, description, principal, model, new ArrayList<String>(), new ArrayList<String>());
+        model.addAttribute("error", "you need at least three commitee members");
+
+        return "index";
+    }*/
+
     @PostMapping
     public String createConference(
             @RequestParam("title") String title,
             @RequestParam("date") String date,
             @RequestParam("description") String description,
-            @RequestParam("user") String[] users,
+            @RequestParam("user") Optional<String[]> us,
             RedirectAttributes redirectAttributes,
             Principal principal,
             Model model){
+
+        String[] users;
+        if(!us.isPresent()){
+            addAttributes(title, date, description, principal, model, new ArrayList<String>(), new ArrayList<String>());
+            model.addAttribute("error", "one or more commitee members not found");
+            return "myConferences";
+        }else {
+            users = us.get();
+        }
 
         String adminEmail = principal.getName();
         User admin = userRepository.findByEmail(adminEmail);

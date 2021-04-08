@@ -31,6 +31,8 @@ public class AddArticleController {
     public String getAddArticle(@PathVariable("id") Long id, Principal principal, Model model){
 
         User user = userRepository.findByEmail(principal.getName());
+        model.addAttribute("username", user.getUsername());
+
         Conference conference = conferenceRepository.findById(id).get();
         if(conference.getParticipants().contains(user) || conference.getAdmin() == user){
             model.addAttribute("id", id);

@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class CreateArticleController {
@@ -42,15 +43,36 @@ public class CreateArticleController {
     public String addArticle(@PathVariable("id") Long id,
                              @RequestParam("title") String title,
                              @RequestParam("description") String description,
-                             @RequestParam("theme") String[] themes,
-                             @RequestParam("user") String[] authors,
+                             @RequestParam("theme") Optional<String[]> optThemes,
+                             @RequestParam("user") Optional<String[]> optAuthors,
                              @RequestParam("file") MultipartFile file,
                              Principal principal,
                              Model model){
 
+        User user = userRepository.findByEmail(principal.getName());
+        model.addAttribute("username", user.getUsername());
+
+        String[] themes;
+        String[] authors;
+
+        if(!optAuthors.isPresent()){
+            addAttributes(title, new String[0], description, model, user, new ArrayList<String>(), new ArrayList<String>());
+            model.addAttribute("error", "authors can't be empty");
+            return "addArticle";
+        }else if(!optThemes.isPresent()){
+            addAttributes(title, new String[0], description, model, user, new ArrayList<String>(), new ArrayList<String>());
+            model.addAttribute("error", "themes can't be empty");
+            return "addArticle";
+        }else if(file.isEmpty()){
+            addAttributes(title, new String[0], description, model, user, new ArrayList<String>(), new ArrayList<String>());
+            model.addAttribute("error", "Pdf file is required for evaluation");
+            return "addArticle";
+        }
+        authors = optAuthors.get();
+        themes = optThemes.get();
+
         CreateArticleService createArticleService = new CreateArticleService(articleRepository, conferenceRepository, userRepository, themeRepository);
 
-        User user = userRepository.findByEmail(principal.getName());
         Conference conference = conferenceRepository.findById(id).get();
 
         ArrayList[] users = new ArrayList[0];
@@ -68,7 +90,7 @@ public class CreateArticleController {
             return "redirect:/articleList?success";
         }else{
             addAttributes(title, themes, description, model, user, foundUsers, notFoundUsers);
-
+            model.addAttribute("error", "one or more users not found");
             return "addArticle";
         }
     }

@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = http://www.thymeleaf.org>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>  
 
-        <link rel="stylesheet" th:href="@{/css/style.css}">
-        <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.png}">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
 
-        <script src="/payment.js"></script>
-
-        <title>Article</title>
+        <script src="payment.js"></script>
+        <title>Proceed with payment</title>
     </head>
     <body>
     <div class="main_container">
@@ -77,30 +76,21 @@
 
 
                 <main class="hotel-view">
-                  <div class="infos">
-                    <h1>Informations</h1>
-                    <h3 class="attribute">Title :</h3>
-                    <p th:text="${article.title}" style="margin-left: 3rem"></p>
-                    <h3 class="attribute">themes :</h3>
-                      <p style="margin-left: 3rem">
-                      <th:block th:each = "theme : ${article.themes}">
-                          <span th:text="${theme.getName()}"></span> &nbsp;
-                      </th:block>
-                      </p>
-                    <h3 class="attribute">description :</h3>
-                    <p th:text="${article.description}" style="margin-left: 3rem"></p>
-                    <h3 class="attribute">rating: <span class="rating" th:text="${article.rating} + ' / 3'"></span></h3>
-                    <div th:if="${!view}">
-                      <form th:action="@{/rateArticle/{id}(id = ${article.id})}" th:method="POST">
-                      <input type="number" step="0.1" min="0" max="3" name="rating" id="rating">
-                      <button class="btn btn-primary" type="submit">rate</button>
-                    </form>
-                  </div>
-                  </div>
-                  <div style="margin-left: 5rem;margin-bottom: 3rem">
-                    <h1>preview</h1>
-                    <a th:href="@{/preview/{id}(id = ${article.getId()})}">preview the article (pdf)</a>
-                  </div>
+                    <div class="container">
+                        <div class='row'>
+                            <div class='wrapper'>
+                                <div class="card">
+                                    <div class="card-header" style="font-size: 5rem;color: #e2001a">
+                                        Error!
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-title" style="font-size: 2.5rem; color: black;">Go Back to homepage</div>
+                                        <p class="card-text" style="font-size: 2.5rem">An error occured while trying to process your request.<br> please try again later</p>
+                                        <a href="/" class="btn btn-primary">Homepage</a>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
                 </main>
             </div>
         </div>

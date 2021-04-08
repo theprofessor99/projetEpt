@@ -60,9 +60,11 @@ public class PaymentController {
     @RequestMapping(value = "/charge/sub/{id}", method = RequestMethod.POST)
     public String chargeCardOnSub(HttpServletRequest request,
                                   @PathVariable("id") Long id,
-                                  Principal principal) throws Exception {
+                                  Principal principal,
+                                  Model model) throws Exception {
 
         User user = userRepository.findByEmail(principal.getName());
+        model.addAttribute("username", user.getUsername());
         Conference conference = conferenceRepository.findById(id).get();
 
         SubscribeConferenceService service = new SubscribeConferenceService(userRepository, conferenceRepository);
@@ -77,9 +79,11 @@ public class PaymentController {
     @RequestMapping(value = "/charge/attend/{id}", method = RequestMethod.POST)
     public String chargeCardOnAttend(HttpServletRequest request,
                                      @PathVariable("id") Long id,
-                                     Principal principal) throws Exception {
+                                     Principal principal,
+                                     Model model) throws Exception {
 
         User user = userRepository.findByEmail(principal.getName());
+        model.addAttribute("username", user.getUsername());
         Tutorial tuto = tutorialRepository.findById(id).get();
 
         SubscribeTutorialService service = new SubscribeTutorialService(userRepository, tutorialRepository);
