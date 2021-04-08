@@ -1,6 +1,7 @@
 package com.ept.conference.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,10 +13,11 @@ public class Tutorial {
     private Long id;
 
     private String title;
-    private String desc;
+    private String description;
     private String status;
+    private LocalDateTime date;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Conference conference;
 
     @ManyToMany
@@ -23,15 +25,15 @@ public class Tutorial {
         inverseJoinColumns = @JoinColumn(name = "participant_id"))
     private Set<User> participants = new HashSet<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private User tutor;
 
     public Tutorial() {
     }
 
-    public Tutorial(String title, String desc) {
+    public Tutorial(String title, String description) {
         this.title = title;
-        this.desc = desc;
+        this.description = description;
         this.status = "pending";
     }
 
@@ -51,12 +53,12 @@ public class Tutorial {
         this.title = title;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String desc) {
+        this.description = desc;
     }
 
     public String getStatus() {
@@ -91,6 +93,14 @@ public class Tutorial {
         this.tutor = tutor;
     }
 
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -111,7 +121,7 @@ public class Tutorial {
         return "Tutorial{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", desc='" + desc + '\'' +
+                ", desc='" + description + '\'' +
                 '}';
     }
 }

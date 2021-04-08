@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,97 +10,123 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="shortcut icon" type="image/png" href="img/favicon.png">
-        
-        <title>trillo &mdash; Your all-in-one booking app</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="shortcut icon" type="/image/png" href="/img/favicon.png">
+
+        <title>Confos &mdash; Conference management System</title>
     </head>
     <body>
-        <div class="main_container">
-            <header class="header">
-                <img src="img/logo.png" alt="trillo logo" class="logo">
+    <div class="main_container">
+        <header class="header">
+            <img src="/img/logo.png" alt="conf logo" class="logo">
 
-                <form action="#" class="search">
-                    <input type="text" class="search__input" placeholder="Search hotels">
-                    <button class="search__button">
-                        <svg class="search__icon">
-                            <use xlink:href="img/sprite.svg#icon-magnifying-glass"></use>
-                        </svg>
-                    </button>
-                </form>
+            <form action="/search" class="search" method="get">
+                <input type="text" class="search__input" placeholder="Search conferences" name="name">
+                <button class="search__button">
+                    <svg class="search__icon">
+                        <use xlink:href="/img/sprite.svg#icon-magnifying-glass"></use>
+                    </svg>
+                </button>
+            </form>
 
-                <nav class="user-nav">
-                    <div class="user-nav__icon-box">
-                        <svg class="user-nav__icon">
-                            <use xlink:href="img/sprite.svg#icon-bookmark"></use>
-                        </svg>
-                        <span class="user-nav__notification">7</span>
-                    </div>
-                    <div class="user-nav__icon-box">
-                        <svg class="user-nav__icon">
-                            <use xlink:href="img/sprite.svg#icon-chat"></use>
-                        </svg>
-                        <span class="user-nav__notification">13</span>
-                    </div>
-                    <div class="user-nav__user">
-                        <img src="img/user.jpg" alt="User photo" class="user-nav__user-photo">
-                        <span class="user-nav__user-name">oussama</span>
-                    </div>
-                </nav>
-            </header>
+            <nav class="user-nav">
+                <div class="user-nav__icon-box">
+                    <svg class="user-nav__icon">
+                        <use xlink:href="/img/sprite.svg#icon-bookmark"></use>
+                    </svg>
+                    <span class="user-nav__notification">7</span>
+                </div>
+
+                <div class="user-nav__user">
+                    <img src="/img/user.jpg" alt="User photo" class="user-nav__user-photo">
+                    <span class="user-nav__user-name" th:text="${username}"></span>
+                </div>
+            </nav>
+        </header>
 
 
-            <div class="content">
-                <nav class="sidebar">
-                    <ul class="side-nav">
-                        <li class="side-nav__item">
-                            <a href="/index.html" class="side-nav__link">
-                                <span>Confernces</span>
-                            </a>
-                        </li>
-                        <li class="side-nav__item">
-                            <a href="/articleList.html" class="side-nav__link">
-                                <span>Articles</span>
-                            </a>
-                        </li>
-                        <li class="side-nav__item">
-                            <a href="/login.html" class="side-nav__link">
-                                <span>Log out</span>
-                            </a>
-                        </li>
-                    </ul>
+        <div class="content">
+            <nav class="sidebar">
+                <ul class="side-nav">
+                    <li class="side-nav__item">
+                        <a href="/" class="side-nav__link">
+                            <span>Browse Confernces</span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item side-nav__item--active">
+                        <a href="/myConferences" class="side-nav__link">
+                            <span>My Confernces</span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a href="/articleList" class="side-nav__link">
+                            <span>Articles</span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a href="/logout" class="side-nav__link">
+                            <span>Log out</span>
+                        </a>
+                    </li>
+                </ul>
 
-                    <div class="legal">
-                        &copy; 2021 by Ept. All rights reserved.
-                    </div>
-                </nav>
+                <div class="legal">
+                    &copy; 2021 by Ept. All rights reserved.
+                </div>
+            </nav>
 
 
 
                 <main class="hotel-view">
                     <div class="wrapper">
+                        <div class="alert alert-success" th:if="${param.subSuccess}">
+                            Payment successful! you are now subscribed
+                        </div>
+                        <div class="alert alert-success" th:if="${param.tutoSuccess}">
+                            Payment successful! you can now attend the Tutorial.
+                            In case of annulation you will be refunded
+                        </div>
+
                       <h1>Informations</h1>
                       <h3 class="conf__info">Title:</h3>
-                      <p class="desc__text">dummy conf</p>
+                      <p class="desc__text" th:text="${conference.title}"></p>
                       <h3 class="conf__info">Start date:</h3>
-                      <p class="desc__text">01/01/2022</p>
+                      <p class="desc__text" th:text="${conference.date}"></p>
                       <h3 class="conf__info">Description: </h3>
-                      <p class="desc__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, cumque nisi, laboriosam neque iure laudantium reiciendis deserunt libero temporibus aspernatur dicta eos? Totam consequatur aliquam nostrum animi earum veniam quibusdam.</p>
+                      <p class="desc__text" th:text="${conference.description}"></p>
 
-                      <form action="/payment.html" method="GET" style="margin-left: 2rem;">
+                        <div  th:if="${admin}">
+                        <h3 class="conf__info">Reviewers:</h3>
+                        <th:block th:each="user : ${commite}" style="display: inline-block;">
+                            <div class="badge" style="margin-left: 2rem; background-color: #4997cd; color: white; padding: 0rem">
+                                <span style="padding-left: .6rem" th:text="${user.getUsername()}"></span><span class="badge badge-light" th:text="${user.getToReviewArticles().size()}"></span>
+                                <span class="sr-only"></span>
+                            </div>
+                        </th:block>
+                            </div>
+
+                      <form th:action="@{/payment/subscribe/{id}(id = ${conference.getId()})}" method="GET" style="margin-left: 2rem;" th:if="${!admin and !sub}">
                         <button type="submit" class="btn btn-primary">subscribe</button>
                       </form>
-                      <form action="/addArticle.html" style="margin-left: 2rem;margin-top: 1rem;">
+                        <form action="#" method="GET" style="margin-left: 2rem;" th:if="${sub}">
+                            <button type="submit" disabled class="btn btn-primary">subscribed</button>
+                        </form>
+
+                        <div class="alert alert-danger" th:if="${param.noSub}" style="margin-top: 2rem">
+                            please subscribe to add an article
+                        </div>
+
+                      <form th:action="@{/addArticle/{id}(id = ${conference.getId()})}" style="margin-left: 2rem;margin-top: 1rem;" th:if="${admin or sub}">
                           <button class="btn btn-success">
                               add article
                           </button>
                       </form>
-                      <form action="addTuto.html" method="GET" style="margin-left: 2rem;margin-top: 1rem;">
+                      <form th:action="@{/addTuto/{id}(id = ${conference.getId()})}" method="GET" style="margin-left: 2rem;margin-top: 1rem;" th:if="${user.speciality != null && (conference.getParticipants().contains(user) or admin)}">
                         <button class="btn btn-success">
                             create tutorial
                         </button>
-                    </form>
-                    </div>
+                      </form>
+                        </div>
 
                     <div class="container">
                       <h1 id="timeline_header">Timeline</h1>
@@ -112,240 +138,157 @@
                       </div>
                   
                   </div>
-                  <div class="row timeline-movement">
-                  
-                      <div class="timeline-badge">
-                          <span class="timeline-balloon-date-day">10</span>
-                          <span class="timeline-balloon-date-month">APR</span>
-                      </div>
-                  
-                  
-                      <div class="col-sm-6  timeline-item">
-                          <div class="row">
-                              <div class="col-sm-11">
-                                  <div class="timeline-panel credits">
-                                      <ul class="timeline-panel-ul">
-                                          <li><span class="importo">Tutorial 1</span></li>
-                                          <li><span id="tuto">tutor :</span> yomna</li>
-                                          <li><span class="causale"><span id="tuto">Title: </span>cours math de l'ingenieur </span> </li>
-                                          <li><span class="causale"><span id="tuto">description :</span>  Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi eaque at quas dolorem neque. Eaque a, similique tenetur</span> </li>
-                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
-                                          <form action="/payment.html" method="GET">
-                                          <button class="btn btn-primary">
-                                              attend
-                                          </button>
-                                        </form>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6  timeline-item">
-                          <div class="row">
-                              <div class="col-sm-offset-1 col-sm-11">
-                                  <div class="timeline-panel debits">
-                                      <ul class="timeline-panel-ul">
-                                          <li><span class="importo">session 1</span></li>
-                                          <li><span class="causale">theme : energy</span> </li>
-                                          <li><span class="causale">article 1 : solar</span> </li>
-                                          <a href="/article.html">check</a>
-                                          <li><span class="causale">article 2 : wind</span> </li>
-                                          <a href="/article.html">check</a>
-                                          <li><span class="causale">article 3 : hydro</span> </li>
-                                          <a href="/article.html">check</a>
-                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6  timeline-item">
-                        <div class="row">
-                            <div class="col-sm-11">
-                                <div class="timeline-panel credits">
-                                    <ul class="timeline-panel-ul">
-                                        <li><span class="importo">Tutorial 1</span></li>
-                                        <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                        <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 10:30 am</small></p> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                      <div class="col-sm-6  timeline-item">
-                        <div class="row">
-                            <div class="col-sm-offset-1 col-sm-11">
-                                <div class="timeline-panel debits">
-                                    <ul class="timeline-panel-ul">
-                                        <li><span class="importo">session 2</span></li>
-                                        <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                        <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 10:30 am</small></p> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6  timeline-item">
-                        <div class="row">
-                            <div class="col-sm-11">
-                                <div class="timeline-panel credits">
-                                    <ul class="timeline-panel-ul">
-                                        <li><span class="importo">Tutorial 3</span></li>
-                                        <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                        <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 14:00 am</small></p> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6  timeline-item">
-                      <div class="row">
-                          <div class="col-sm-offset-1 col-sm-11">
-                              <div class="timeline-panel debits">
-                                  <ul class="timeline-panel-ul">
-                                      <li><span class="importo">session 3</span></li>
-                                      <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                      <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 14:00 am</small></p> </li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-sm-6  timeline-item">
-                    <div class="row">
-                        <div class="col-sm-11">
-                            <div class="timeline-panel credits">
-                                <ul class="timeline-panel-ul">
-                                    <li><span class="importo">Tutorial 4</span></li>
-                                    <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                    <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 15:30 am</small></p> </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                  <div class="col-sm-6  timeline-item">
-                    <div class="row">
-                        <div class="col-sm-offset-1 col-sm-11">
-                            <div class="timeline-panel debits">
-                                <ul class="timeline-panel-ul">
-                                    <li><span class="importo">session 4</span></li>
-                                    <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                    <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 15:30 am</small></p> </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                  </div>
-                  
-                  <!--due -->
-                  
-                  <div class="row timeline-movement">
-                  
-                  
-                      <div class="timeline-badge">
-                          <span class="timeline-balloon-date-day">11</span>
-                          <span class="timeline-balloon-date-month">APR</span>
-                      </div>
-                  
-                      <div class="col-sm-offset-6 col-sm-6  timeline-item">
-                          <div class="row">
-                              <div class="col-sm-offset-1 col-sm-11">
-                                  <div class="timeline-panel debits">
-                                      <ul class="timeline-panel-ul">
-                                          <li><span class="importo">session 1</span></li>
-                                          <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
-                                      </ul>
+                      <th:block th:each = "day : ${days}">
+
+                          <div class="row timeline-movement">
+                          <div class="timeline-badge">
+                              <span class="timeline-balloon-date-day" th:text="${day.getDate().getDayOfMonth()}"></span><br>
+                              <span class="timeline-balloon-date-month" th:text="${day.getDate().format(formatter)}"></span>
+                          </div>
+
+                          <div class="col-sm-6 col-sm-offset-6  timeline-item" th:if="${day.getSessions()[0] != null}">
+                              <div class="row">
+                                  <div class="col-sm-offset-1 col-sm-11">
+                                      <div class="timeline-panel debits">
+                                          <ul class="timeline-panel-ul">
+                                              <li><span class="importo">session 1</span></li>
+                                              <li><span class="causale">theme : </span>
+                                                    <th:block th:each = "theme : ${day.getSessions[0].getThemes()}">
+                                                        <span th:text="${theme.getName()}"></span>
+                                                    </th:block>
+                                              </li>
+                                              <th:block th:each = "article : ${day.getSessions()[0].getArticles()}">
+                                                  <li><span class="causale" th:text="'article : ' + ${article.getTitle()}"></span> </li>
+                                                  <a th:href="@{/view/{id}(id = ${article.getId()})}">check</a>
+                                              </th:block>
+                                              <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>
+                                                  <span th:text="${day.getSessions()[0].getDate().getHour()} + ':' + ${day.getSessions()[0].getDate().getMinute()} +  ' am'">
+                                                    </span>
+                                              </small></p></li>
+                                          </ul>
+                                      </div>
                                   </div>
-                  
                               </div>
                           </div>
-                      </div>
-                      <div class="col-sm-6  timeline-item">
-                          <div class="row">
-                              <div class="col-sm-11">
-                                  <div class="timeline-panel credits">
-                                      <ul class="timeline-panel-ul">
-                                          <li><span class="importo">tutorial 1</span></li>
-                                          <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 14:00</small></p> </li>
-                                      </ul>
+
+
+                          <div class="col-sm-6  timeline-item" th:if="${day.getTutorial() != null}">
+                              <div class="row">
+                                  <div class="col-sm-11">
+                                      <div class="timeline-panel credits">
+                                          <ul class="timeline-panel-ul">
+                                              <li><span class="importo">Tutorial :</span></li>
+                                              <li><span id="tuto">tutor :</span><span th:text="${day.getTutorial().getTutor().getUsername()}"></span></li>
+                                              <li><span id="tuto">Title: </span><span th:text="${day.getTutorial().getTitle()}"></span> </li>
+                                              <li><span id="tuto">description :</span><span th:text="${day.getTutorial().getDescription()}"></span> </li>
+                                              <div th:text="${day.getTutorial().getStatus()}" class="badge badge-secondary" style="background-color: #777777" th:if="${day.getTutorial().getStatus() == 'pending'}"></div>
+                                              <div th:text="${day.getTutorial().getStatus()}" class="badge badge-danger" style="background-color: #e2001a" th:if="${day.getTutorial().getStatus() == 'caneled'}"></div>
+                                              <div th:text="${day.getTutorial().getStatus()}" class="badge badge-success" style="background-color: #1CB94E" th:if="${day.getTutorial().getStatus() == 'active'}"></div>
+                                              <div class="badge badge-info" style="background-color: #4997cd" th:if="${day.getTutorial().getParticipants().contains(user)}">
+                                                  attending
+                                              </div>
+                                              <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
+                                              <form th:action="@{/payment/attend/{id}(id = ${day.getTutorial().getId()})}" method="GET">
+                                                  <button class="btn btn-primary" th:if="${!admin && !day.getTutorial().getParticipants().contains(user)}">
+                                                      attend
+                                                  </button>
+                                              </form>
+                                          </ul>
+                                      </div>
                                   </div>
-                  
                               </div>
                           </div>
-                      </div>
-                      <div class="col-sm-offset-6 col-sm-6  timeline-item">
-                        <div class="row">
-                            <div class="col-sm-offset-1 col-sm-11">
-                                <div class="timeline-panel debits">
-                                    <ul class="timeline-panel-ul">
-                                        <li><span class="importo">session 2</span></li>
-                                        <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                        <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 14:00</small></p> </li>
-                                    </ul>
-                                </div>
-                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6  timeline-item">
-                        <div class="row">
-                            <div class="col-sm-11">
-                                <div class="timeline-panel credits">
-                                    <ul class="timeline-panel-ul">
-                                        <li><span class="importo">tutorial 2</span></li>
-                                        <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                        <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 15:30 pm</small></p> </li>
-                                    </ul>
-                                </div>
-                
-                            </div>
-                        </div>
-                    </div>
-                  
-                  
-                  </div>
-                  <div class="row timeline-movement">
-                  
-                  
-                      <div class="timeline-badge">
-                          <span class="timeline-balloon-date-day">12</span>
-                          <span class="timeline-balloon-date-month">APR</span>
-                      </div>
-                  
-                      <div class="col-sm-offset-6 col-sm-6  timeline-item">
-                          <div class="row">
-                              <div class="col-sm-offset-1 col-sm-11">
-                                  <div class="timeline-panel debits">
-                                      <ul class="timeline-panel-ul">
-                                          <li><span class="importo">session 1</span></li>
-                                          <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 9 am</small></p> </li>
-                                      </ul>
+
+                          <div class="col-sm-6 col-sm-offset-6 timeline-item" th:if="${day.getSessions()[1] == null}">
+                              <div class="row">
+                                  <div class="col-sm-offset-1 col-sm-11">
                                   </div>
-                  
                               </div>
                           </div>
-                      </div>
-                      <div class="col-sm-offset-6 col-sm-6  timeline-item">
-                          <div class="row">
-                              <div class="col-sm-offset-1 col-sm-11">
-                                  <div class="timeline-panel debits">
-                                      <ul class="timeline-panel-ul">
-                                          <li><span class="importo">session 2</span></li>
-                                          <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-                                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 10:30 am</small></p> </li>
-                                      </ul>
+
+                          <div class="col-sm-6 timeline-item" th:if="${day.getSessions()[1] != null}">
+                              <div class="row">
+                                  <div class="col-sm-offset-1 col-sm-11">
+                                      <div class="timeline-panel debits">
+                                          <ul class="timeline-panel-ul">
+                                              <li><span class="importo">session 2</span></li>
+                                              <li><span class="causale">theme : </span>
+                                                  <th:block th:each = "theme : ${day.getSessions()[1].getThemes()}">
+                                                      <span th:text="${theme.getName()}"></span>
+                                                  </th:block>
+                                              </li>
+                                              <th:block th:each = "article : ${day.getSessions()[1].getArticles()}">
+                                                  <li><span class="causale" th:text="'article : ' + ${article.getTitle()}"></span> </li>
+                                                  <a th:href="@{/view/{id}(id = ${article.getId()})}">check</a>
+                                              </th:block>
+                                              <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>
+                                                  <span th:text="${day.getSessions()[1].getDate().getHour()} + ':' + ${day.getSessions()[1].getDate().getMinute()} + ' am'">
+                                                    </span>
+                                              </small></p></li>
+                                          </ul>
+                                      </div>
                                   </div>
-                  
                               </div>
                           </div>
-                      </div>
-                  </div>
+
+
+
+                          <div class="col-sm-6 col-sm-offset-6 timeline-item" th:if="${day.getSessions()[2] != null}">
+                              <div class="row">
+                                  <div class="col-sm-offset-1 col-sm-11">
+                                      <div class="timeline-panel debits">
+                                          <ul class="timeline-panel-ul">
+                                              <li><span class="importo">session 3</span></li>
+                                              <li><span class="causale">theme : </span>
+                                                  <th:block th:each = "theme : ${day.getSessions()[2].getThemes()}">
+                                                      <span th:text="${theme.getName()}"></span>
+                                                  </th:block>
+                                              </li>
+                                              <th:block th:each = "article : ${day.getSessions()[2].getArticles()}">
+                                                  <li><span class="causale" th:text="'article : '  + ${article.getTitle()}"></span> </li>
+                                                  <a th:href="@{/view/{id}(id = ${article.getId()})}">check</a>
+                                              </th:block>
+                                              <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>
+                                                  <span th:text="${day.getSessions()[2].getDate().getHour()} + ':' + ${day.getSessions()[2].getDate().getMinute()} + ' am'">
+
+                                                    </span>
+                                              </small></p></li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+
+                          <div class="col-sm-6 col-sm-offset-6 timeline-item" th:if="${day.getSessions()[3] != null}">
+                              <div class="row">
+                                  <div class="col-sm-offset-1 col-sm-11">
+                                      <div class="timeline-panel debits">
+                                          <ul class="timeline-panel-ul">
+                                              <li><span class="importo">session 4</span></li>
+                                              <li><span class="causale">theme : </span>
+                                                  <th:block th:each = "theme : ${day.getSessions()[2].getThemes()}">
+                                                      <span th:text="${theme.getName()}"></span>
+                                                  </th:block>
+                                              </li>
+                                              <th:block th:each = "article : ${day.getSessions()[2].getArticles()}">
+                                                  <li><span class="causale" th:text="'article : ' + ${article.getTitle()}"></span> </li>
+                                                  <a th:href="@{/view/{id}(id = ${article.getId()})}">check</a>
+                                              </th:block>
+                                              <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>
+                                                  <span th:text="${day.getSessions()[2].getDate().getHour()} + ':' + ${day.getSessions()[2].getDate().getMinute()} + ' am'">
+
+                                                    </span>
+                                              </small></p></li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          </div>
+                      </th:block>
+
                   </div>
                   </div>
                 </main>

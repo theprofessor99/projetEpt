@@ -1,6 +1,7 @@
 package com.ept.conference.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,12 +12,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String Username;
+    private String username;
     private String email;
     private String Speciality;
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "admin_id")
     private Set<Conference> conferences = new HashSet<Conference>();
 
@@ -26,12 +27,15 @@ public class User {
     @ManyToMany(mappedBy = "reviewers")
     private Set<Conference> supervisedConferences = new HashSet<Conference>();
 
+    @ManyToMany(mappedBy = "presenters")
+    private Set<Article> toPresentArticles = new HashSet<>();
+
     @ManyToMany(mappedBy = "authors")
     private Set<Article> articles = new HashSet<Article>();
     @ManyToMany(mappedBy = "reviewers")
     private Set<Article> toReviewArticles = new HashSet<Article>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "tutorial_id")
     private Set<Tutorial> tutorial = new HashSet<Tutorial>();
 
@@ -41,18 +45,34 @@ public class User {
     public User() {
     }
 
-    public User(String username, String email, String speciality, String password) {
-        Username = username;
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "user_id")
+    private Set<RateArticle> rateArticles = new HashSet<RateArticle>();
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id"))
+
+    private Collection<Role> roles;
+
+    public User(String username, String email, String speciality, String password, Collection<Role> roles) {
+        this.username = username;
         this.email = email;
-        Speciality = speciality;
+        this.Speciality = speciality;
         this.password = password;
+        this.roles = roles;
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, Collection<Role> roles) {
 
-        this.Username = username;
+        this.username = username;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -64,11 +84,11 @@ public class User {
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getEmail() {
@@ -151,6 +171,31 @@ public class User {
         this.subscribedTutorial = subscribedTutorial;
     }
 
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Set<RateArticle> getRateArticles() {
+        return rateArticles;
+    }
+
+    public void setRateArticles(Set<RateArticle> rateArticles) {
+        this.rateArticles = rateArticles;
+    }
+
+
+    public Set<Article> getToPresentArticles() {
+        return toPresentArticles;
+    }
+
+    public void setToPresentArticles(Set<Article> toPresentArticles) {
+        this.toPresentArticles = toPresentArticles;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -170,7 +215,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", Username='" + Username + '\'' +
+                ", Username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }

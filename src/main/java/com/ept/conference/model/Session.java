@@ -17,20 +17,20 @@ public class Session {
 
     private LocalDateTime date;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Theme theme;
+    @ManyToMany(mappedBy = "sessions")
+    private Set<Theme> themes = new HashSet<Theme>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Conference conference;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "session_id")
     private Set<Article> articles = new HashSet<Article>();
 
     public Session() {
     }
 
-    public Session(LocalDateTime date) {
+    public Session(LocalDateTime date, Conference conference) {
         this.date = date;
         this.conference = conference;
     }
@@ -51,12 +51,12 @@ public class Session {
         this.date = date;
     }
 
-    public Theme getTheme() {
-        return theme;
+    public Set<Theme> getThemes() {
+        return themes;
     }
 
-    public void setTheme(Theme theme) {
-        this.theme = theme;
+    public void setThemes(Set<Theme> themes) {
+        this.themes = themes;
     }
 
     public Conference getConference() {

@@ -1,6 +1,7 @@
 package com.ept.conference.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
@@ -14,10 +15,10 @@ public class Conference {
     private Long id;
 
     private String title;
-    private LocalDateTime date;
+    private LocalDate date;
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private User admin;
 
     @ManyToMany
@@ -30,18 +31,22 @@ public class Conference {
         inverseJoinColumns = @JoinColumn(name = "reviewer_id"))
     private Set<User> reviewers = new HashSet<User>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "conference_id")
     private Set<Tutorial> tutorials = new HashSet<Tutorial>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "conference_id")
     private Set<Session> sessions = new HashSet<Session>();
+
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "conference_id")
+    private Set<Article> articles = new HashSet<Article>();
 
     public Conference() {
     }
 
-    public Conference(String title, LocalDateTime date, String description) {
+    public Conference(String title, LocalDate date, String description) {
         this.title = title;
         this.date = date;
         this.description = description;
@@ -63,11 +68,11 @@ public class Conference {
         this.title = title;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -119,6 +124,13 @@ public class Conference {
         this.sessions = sessions;
     }
 
+    public Set<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Set<Article> articles) {
+        this.articles = articles;
+    }
 
     @Override
     public boolean equals(Object o) {

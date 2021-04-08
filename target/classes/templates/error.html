@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>  
+
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+
+        <script src="payment.js"></script>
+        <title>Error</title>
+    </head>
+    <body>
+    <div class="main_container">
+        <header class="header">
+            <img src="/img/logo.png" alt="conf logo" class="logo">
+
+            <form action="/search" class="search" method="get">
+                <input type="text" class="search__input" placeholder="Search conferences" name="name">
+                <button class="search__button">
+                    <svg class="search__icon">
+                        <use xlink:href="/img/sprite.svg#icon-magnifying-glass"></use>
+                    </svg>
+                </button>
+            </form>
+
+            <nav class="user-nav">
+                <div class="user-nav__icon-box">
+                    <svg class="user-nav__icon">
+                        <use xlink:href="/img/sprite.svg#icon-bookmark"></use>
+                    </svg>
+                    <span class="user-nav__notification">7</span>
+                </div>
+
+                <div class="user-nav__user">
+                    <img src="/img/user.jpg" alt="User photo" class="user-nav__user-photo">
+                    <span class="user-nav__user-name" th:text="${username}"></span>
+                </div>
+            </nav>
+        </header>
+
+
+        <div class="content">
+            <nav class="sidebar">
+                <ul class="side-nav">
+                    <li class="side-nav__item">
+                        <a href="/" class="side-nav__link">
+                            <span>Browse Confernces</span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a href="/myConferences" class="side-nav__link">
+                            <span>My Confernces</span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a href="/articleList" class="side-nav__link">
+                            <span>Articles</span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a href="/logout" class="side-nav__link">
+                            <span>Log out</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="legal">
+                    &copy; 2021 by Ept. All rights reserved.
+                </div>
+            </nav>
+
+
+
+                <main class="hotel-view">
+                    <div class="container">
+                        <div class='row'>
+                            <div class='wrapper'>
+                                <div class="card">
+                                    <div class="card-header" style="font-size: 5rem;color: #e2001a">
+                                        Error!
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-title" style="font-size: 2.5rem; color: black;">Go Back to homepage</div>
+                                        <p class="card-text" style="font-size: 2.5rem">An error occured while trying to process your request.<br> please try again later</p>
+                                        <a href="/" class="btn btn-primary">Homepage</a>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>
