@@ -13,7 +13,7 @@ public class Tutorial {
     private Long id;
 
     private String title;
-    private String desc;
+    private String description;
     private String status;
     private LocalDateTime date;
 
@@ -31,9 +31,9 @@ public class Tutorial {
     public Tutorial() {
     }
 
-    public Tutorial(String title, String desc) {
+    public Tutorial(String title, String description) {
         this.title = title;
-        this.desc = desc;
+        this.description = description;
         this.status = "pending";
     }
 
@@ -53,12 +53,12 @@ public class Tutorial {
         this.title = title;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String desc) {
+        this.description = desc;
     }
 
     public String getStatus() {
@@ -121,7 +121,7 @@ public class Tutorial {
         return "Tutorial{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", desc='" + desc + '\'' +
+                ", desc='" + description + '\'' +
                 '}';
     }
 }

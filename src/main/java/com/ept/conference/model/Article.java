@@ -42,6 +42,11 @@ public class Article {
     @ManyToOne(cascade = CascadeType.MERGE)
     private Conference conference;
 
+    @ManyToMany
+    @JoinTable(name = "article_presenters", joinColumns = @JoinColumn(name = "article_id"),
+            inverseJoinColumns = @JoinColumn(name = "presenter_id"))
+    private Set<User> presenters = new HashSet<User>();
+
     public Article() {
     }
 
@@ -137,6 +142,14 @@ public class Article {
 
     public void setFile(String file) {
         this.file = file;
+    }
+
+    public Set<User> getPresenters() {
+        return presenters;
+    }
+
+    public void setPresenters(Set<User> presenters) {
+        this.presenters = presenters;
     }
 
     @Override

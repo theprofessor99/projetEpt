@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -29,7 +30,7 @@ public class CreateArticleService {
         this.themeRepository = themeRepository;
     }
 
-    public ArrayList<String>[] createArticle(String title, String description, String[] authors, String[] themes, Conference conference, String fileName){
+    public ArrayList<String>[] createArticle(String title, String description, String[] authors, String[] themes, Conference conference, String fileName, Optional<String[]> optPresenters){
         ArrayList<User> users = new ArrayList<>();
         ArrayList<String> notFounduUsers = new ArrayList<>();
         ArrayList<String> foundUsers = new ArrayList<>();
@@ -98,8 +99,18 @@ public class CreateArticleService {
                 }
             }
 
+            if(optPresenters.isPresent()){
+                String[] presenters = optPresenters.get();
+                for(String presenter : presenters){
+                    User pres = userRepository.findByUsername(presenter);
+                    article.getPresenters().add(pres);
+                    pres.getToPresentArticles().add(article);
+                }
+            }
+
             article.getReviewers().forEach(r -> System.out.println(r.getUsername()));
             userRepository.saveAll(article.getReviewers());
+            userRepository.saveAll(article.getPresenters());
             articleRepository.save(article);
 
             return new ArrayList[]{foundUsers, notFounduUsers};

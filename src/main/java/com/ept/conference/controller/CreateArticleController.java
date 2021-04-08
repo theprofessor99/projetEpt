@@ -8,6 +8,7 @@ import com.ept.conference.repositories.ThemeRepository;
 import com.ept.conference.repositories.UserRepository;
 import com.ept.conference.service.CreateArticleService;
 import com.ept.conference.service.FileService;
+import com.ept.conference.service.FindPresentersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,12 +32,14 @@ public class CreateArticleController {
     private final UserRepository userRepository;
     private final ArticleRepository articleRepository;
     private final ThemeRepository themeRepository;
+    private final FindPresentersService findPresentersService;
 
-    public CreateArticleController(ConferenceRepository conferenceRepository, UserRepository userRepository, ArticleRepository articleRepository, ThemeRepository themeRepository) {
+    public CreateArticleController(ConferenceRepository conferenceRepository, UserRepository userRepository, ArticleRepository articleRepository, ThemeRepository themeRepository, FindPresentersService findPresentersService) {
         this.conferenceRepository = conferenceRepository;
         this.userRepository = userRepository;
         this.articleRepository = articleRepository;
         this.themeRepository = themeRepository;
+        this.findPresentersService = findPresentersService;
     }
 
     @RequestMapping(value = "/createArticle/{id}", method = RequestMethod.POST)
@@ -45,6 +48,7 @@ public class CreateArticleController {
                              @RequestParam("description") String description,
                              @RequestParam("theme") Optional<String[]> optThemes,
                              @RequestParam("user") Optional<String[]> optAuthors,
+                             @RequestParam("pres") Optional<String[]> optPresenters,
                              @RequestParam("file") MultipartFile file,
                              Principal principal,
                              Model model){
@@ -55,13 +59,25 @@ public class CreateArticleController {
         String[] themes;
         String[] authors;
 
+        ArrayList[] pres = new ArrayList[0];
+        pres = findPresentersService.findPresenters(optPresenters);
+
+        ArrayList<String> foundPresenters =pres[0];
+        ArrayList<String> notFoundPresenters = pres[1];
+
         if(!optAuthors.isPresent()){
             addAttributes(title, new String[0], description, model, user, new ArrayList<String>(), new ArrayList<String>());
             model.addAttribute("error", "authors can't be empty");
             return "addArticle";
-        }else if(!optThemes.isPresent()){
+        }else if(!optThemes.isPresent()) {
             addAttributes(title, new String[0], description, model, user, new ArrayList<String>(), new ArrayList<String>());
             model.addAttribute("error", "themes can't be empty");
+            return "addArticle";
+        }else if(notFoundPresenters.size() !=0){
+            addAttributes(title, new String[0], description, model, user, new ArrayList<String>(), new ArrayList<String>());
+            model.addAttribute("foundPresenters", foundPresenters);
+            model.addAttribute("notFoundPresenters", notFoundPresenters);
+            model.addAttribute("error", "one or more presenters do not exist");
             return "addArticle";
         }else if(file.isEmpty()){
             addAttributes(title, new String[0], description, model, user, new ArrayList<String>(), new ArrayList<String>());
@@ -77,7 +93,7 @@ public class CreateArticleController {
 
         ArrayList[] users = new ArrayList[0];
         try {
-            users = createArticleService.createArticle(title, description, authors, themes, conference, file.getOriginalFilename());
+            users = createArticleService.createArticle(title, description, authors, themes, conference, file.getOriginalFilename(), optPresenters);
         } catch (Exception e) {
             e.printStackTrace();
         }

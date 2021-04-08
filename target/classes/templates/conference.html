@@ -98,8 +98,8 @@
                         <div  th:if="${admin}">
                         <h3 class="conf__info">Reviewers:</h3>
                         <th:block th:each="user : ${commite}" style="display: inline-block;">
-                            <div class="btn btn-primary rev-tag">
-                                <span th:text="${user.getUsername()}"></span><span class="badge badge-light" th:text="${user.getToReviewArticles().size()}"></span>
+                            <div class="badge" style="margin-left: 2rem; background-color: #4997cd; color: white; padding: 0rem">
+                                <span style="padding-left: .6rem" th:text="${user.getUsername()}"></span><span class="badge badge-light" th:text="${user.getToReviewArticles().size()}"></span>
                                 <span class="sr-only"></span>
                             </div>
                         </th:block>
@@ -181,7 +181,7 @@
                                               <li><span class="importo">Tutorial :</span></li>
                                               <li><span id="tuto">tutor :</span><span th:text="${day.getTutorial().getTutor().getUsername()}"></span></li>
                                               <li><span id="tuto">Title: </span><span th:text="${day.getTutorial().getTitle()}"></span> </li>
-                                              <li><span id="tuto">description :</span><span th:text="${day.getTutorial().getDesc()}"></span> </li>
+                                              <li><span id="tuto">description :</span><span th:text="${day.getTutorial().getDescription()}"></span> </li>
                                               <div th:text="${day.getTutorial().getStatus()}" class="badge badge-secondary" style="background-color: #777777" th:if="${day.getTutorial().getStatus() == 'pending'}"></div>
                                               <div th:text="${day.getTutorial().getStatus()}" class="badge badge-danger" style="background-color: #e2001a" th:if="${day.getTutorial().getStatus() == 'caneled'}"></div>
                                               <div th:text="${day.getTutorial().getStatus()}" class="badge badge-success" style="background-color: #1CB94E" th:if="${day.getTutorial().getStatus() == 'active'}"></div>

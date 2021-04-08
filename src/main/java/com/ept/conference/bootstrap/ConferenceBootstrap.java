@@ -38,7 +38,6 @@ public class ConferenceBootstrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         /*User oussama = new User("oussama", "oussamamaster0@gmail.com", "afd",bCryptPasswordEncoder.encode("password"), Arrays.asList(new Role("ROLE_USER")));
         User houssem = new User("houssem", "afd@g.c", "fdd", bCryptPasswordEncoder.encode("password"), Arrays.asList(new Role("ROLE_USER")));
@@ -101,7 +100,7 @@ public class ConferenceBootstrap implements CommandLineRunner {
 
         conferenceRepository.findAll().forEach(conference -> System.out.println(conference.getTitle()));
         */
-        User oussama = new User("oussama", "oussamamaster0@gmail.com", "afd",bCryptPasswordEncoder.encode("1"), Arrays.asList(new Role("ROLE_USER")));
+        /*User oussama = new User("oussama", "oussamamaster0@gmail.com", "afd",bCryptPasswordEncoder.encode("1"), Arrays.asList(new Role("ROLE_USER")));
         userRepository.save(oussama);
 
         Conference conference1 = new Conference("conf1", LocalDate.now(), "hfmdjfq");
@@ -196,7 +195,7 @@ public class ConferenceBootstrap implements CommandLineRunner {
         conference1.getReviewers().add(houssem);
         houssem.getSupervisedConferences().add(conference1);
 
-        conferenceRepository.save(conference1);
+        conferenceRepository.save(conference1);*/
 
     }
 }

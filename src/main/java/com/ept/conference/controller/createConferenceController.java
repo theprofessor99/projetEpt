@@ -94,12 +94,12 @@ public class createConferenceController {
             model.addAttribute("error", "one or more commitee members not found");
 
 
-            return "index";
+            return "myConferences";
         }else{
             addAttributes(title, date, description, principal, model, foundUsers, notFoundUsers);
             model.addAttribute("error", "you need at least three commitee members");
 
-            return "index";
+            return "myConferences";
         }
 
     }

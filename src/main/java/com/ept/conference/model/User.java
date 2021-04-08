@@ -27,6 +27,9 @@ public class User {
     @ManyToMany(mappedBy = "reviewers")
     private Set<Conference> supervisedConferences = new HashSet<Conference>();
 
+    @ManyToMany(mappedBy = "presenters")
+    private Set<Article> toPresentArticles = new HashSet<>();
+
     @ManyToMany(mappedBy = "authors")
     private Set<Article> articles = new HashSet<Article>();
     @ManyToMany(mappedBy = "reviewers")
@@ -59,7 +62,7 @@ public class User {
     public User(String username, String email, String speciality, String password, Collection<Role> roles) {
         this.username = username;
         this.email = email;
-        Speciality = speciality;
+        this.Speciality = speciality;
         this.password = password;
         this.roles = roles;
     }
@@ -182,6 +185,15 @@ public class User {
 
     public void setRateArticles(Set<RateArticle> rateArticles) {
         this.rateArticles = rateArticles;
+    }
+
+
+    public Set<Article> getToPresentArticles() {
+        return toPresentArticles;
+    }
+
+    public void setToPresentArticles(Set<Article> toPresentArticles) {
+        this.toPresentArticles = toPresentArticles;
     }
 
     @Override
