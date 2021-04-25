@@ -35,11 +35,11 @@
 			<version>2.3.3.RELEASE</version>
 		</dependency>
 
-		<!--<dependency>
+		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
-		</dependency>-->
+		</dependency>
 
 		<!--<dependency>
 			<groupId>mysql</groupId>
@@ -50,11 +50,11 @@
 			<artifactId>mariadb-java-client</artifactId>
 		</dependency>-->
 
-		<dependency>
+		<!--<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency>-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
